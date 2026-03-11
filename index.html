@@ -741,16 +741,92 @@ function addTyping(){
 }
 function removeTyping(){const t=document.getElementById('typing');if(t)t.remove();}
 
-async function sendMsg(){
-  const text=inp.value.trim(); if(!text) return;
-  inp.value=''; document.getElementById('suggestions').style.display='none';
-  addMsg('user',text); history.push({role:'user',content:text}); addTyping();
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:PROFILE,messages:history})
-    });
-    const data=await res.json();
-    const reply=data.content?.map(b=>b.text||'').join('')||"Désolé, erreur de réponse.";
-    removeTyping(); history.push({role:'assistant',content:reply}); addMsg('assistant',reply);
-  }catch(e){re
+// ── SMART LOCAL AGENT ──────────────────────────────────────────────
+const KB = [
+  {
+    keys: ['compétence','compétences','outil','outils','maîtrise','sait','technologie','stack','technique'],
+    answer: `Damtoti maîtrise un large stack Data :\n\n**BI & Reporting :** Power BI (DAX, Power Query M), Tableau, QlikView, Excel/VBA\n**Langages :** Python (pandas, seaborn, scikit-learn), SQL, SAS\n**Data Science :** Machine Learning, Statistiques, Économétrie, Séries temporelles (SARIMAX)\n**Cloud & Big Data :** AWS, Azure, Big Data, Elasticsearch\n**Domaines métier :** Finance, Trésorerie, CRM, Risk Management`
+  },
+  {
+    keys: ['expérience','expériences','travail','poste','emploi','bpce','neuflize','gaea','cepac','alternance','stage'],
+    answer: `Damtoti a 4 expériences professionnelles :\n\n**1. Crédit Foncier | BPCE** — Chargé d'Études (alternance, 09/2025 → aujourd'hui, Paris)\nPower BI trésorerie, automatisation des contrôles qualité collatéraux.\n\n**2. Neuflize OBC** — Customer Data Analyst (alternance, 09/2024–09/2025, Paris)\nDashboards dynamiques, reporting multi-sources (CRM/SharePoint/Qlikview), KPI automatisés, dictionnaire DDS.\n\n**3. Gaea21** — Data Analyst (stage, 06–08/2024, Genève)\nWeb scraping Python, reportings Power BI, projets open-source environnementaux.\n\n**4. CEPAC | BPCE** — Gestionnaire de clientèle (stage, 03–08/2023, Guadeloupe)\nConseil clients, analyse financière, gestion des risques.`
+  },
+  {
+    keys: ['formation','formations','diplôme','école','eslsca','nexa','pau','étude','études','master','mba'],
+    answer: `Damtoti a suivi 3 formations :\n\n**MBA Finance et Data Performance** — ESLSCA Business School (2025 → présent)\nBanking Risk, Machine Learning, Statistiques appliquées, Data Visualisation.\n\n**Master Data et IA** — NEXA Digital School (2024–2025)\nBig Data, AWS/Azure, Machine Learning, Elasticsearch.\n\n**Maîtrise CEEM** — Université de Pau (2023–2024)\nStatistiques, Économétrie, Méthodes quantitatives.`
+  },
+  {
+    keys: ['certification','certif','certifications','microsoft','power bi','amf','pl-300'],
+    answer: `Damtoti possède 3 certifications :\n\n✦ **Microsoft Power BI Data Analyst Associate** (PL-300)\n✦ **Certification AMF** (en cours)\n✦ **Chef de projet Data et IA**`
+  },
+  {
+    keys: ['projet','projets','powerbi','excel','python','jupyter','pokemon','maven','assurance','sarimax','arbres','arbre','pilotage','gestion'],
+    answer: `Damtoti a réalisé plusieurs projets concrets :\n\n**Power BI & Excel :**\n• Abeilles Assurance — suivi contrats, sinistres et performance commerciale\n• Contrôle de Gestion — pilotage budgétaire et indicateurs financiers\n• Dashboard Pilotage Commercial — KPI ventes et suivi des objectifs (Excel)\n• Maven Cycles Reporting — analyse ventes, stocks et rentabilité\n\n**Python & Data Science :**\n• Analyse Pokémon — statistiques descriptives, clustering, classification\n• Arbres de décision — Random Forest, classification et régression\n• Data Analysis Python — nettoyage, EDA, visualisations avancées\n• Prévision SARIMAX — séries temporelles avec effets saisonniers`
+  },
+  {
+    keys: ['contact','contacter','email','mail','téléphone','phone','linkedin','joindre','disponible','disponibilité'],
+    answer: `Pour contacter Damtoti :\n\n📧 **Email :** dfkangbie@gmail.com\n📞 **Téléphone :** 06 41 25 27 35\n💼 **LinkedIn :** linkedin.com/in/damtoti.kangbie\n🌐 **Portfolio :** portfolio.damtoti\n\n📍 Basé à Paris — disponible en Île-de-France et remote.`
+  },
+  {
+    keys: ['qui','présente','présentation','profil','parle','toi','damtoti','kangbie','bonjour','salut','hello'],
+    answer: `Damtoti KANGBIE est **Data Analyst & Data Scientist** basé à Paris.\n\nActuellement en alternance chez **Crédit Foncier | BPCE** comme Chargé d'Études, il est spécialisé dans la BI, le reporting avancé et l'analyse de données dans le secteur financier.\n\nPassionné par la transformation de la donnée brute en décisions stratégiques, il cumule des expériences en banque privée, fintech et ONG internationale.`
+  },
+  {
+    keys: ['langue','langues','anglais','français','parle'],
+    answer: `Damtoti parle **français** (langue maternelle) et **anglais** (niveau professionnel).`
+  },
+  {
+    keys: ['intérêt','passion','hobby','loisir','sport','football','cuisine','centre'],
+    answer: `En dehors du travail, Damtoti est passionné de **football** et de **cuisine**. 🍽️⚽`
+  },
+  {
+    keys: ['recruter','recrutement','embauche','opportunité','poste','offre'],
+    answer: `Damtoti est ouvert aux opportunités en Data Analytics, Data Science ou Business Intelligence.\n\nContactez-le directement :\n📧 dfkangbie@gmail.com\n📞 06 41 25 27 35`
+  }
+];
+
+function smartReply(question) {
+  const normalize = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const q = normalize(question);
+  for (const entry of KB) {
+    if (entry.keys.some(k => q.includes(normalize(k)))) {
+      return entry.answer;
+    }
+  }
+  return `Je n'ai pas de réponse précise, mais vous pouvez contacter Damtoti directement :\n📧 dfkangbie@gmail.com | 📞 06 41 25 27 35\n\nEssayez de mentionner : compétences, expériences, projets, formations, certifications ou contact.`;
+}
+
+function formatReply(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+
+async function sendMsg() {
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  document.getElementById('suggestions').style.display = 'none';
+  addMsg('user', text);
+  history.push({ role: 'user', content: text });
+  addTyping();
+
+  await new Promise(r => setTimeout(r, 600 + Math.random() * 700));
+
+  const reply = smartReply(text);
+  removeTyping();
+  history.push({ role: 'assistant', content: reply });
+
+  const d = document.createElement('div');
+  d.className = 'msg';
+  d.style.animation = 'fadeUp .3s ease';
+  d.innerHTML = `<div class="msg-av">DK</div><div class="msg-bub">${formatReply(reply)}</div>`;
+  msgsEl.appendChild(d);
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+}
+
+function sendSugg(btn) { inp.value = btn.textContent; sendMsg(); }
+inp.addEventListener('keydown', e => { if (e.key === 'Enter') sendMsg(); });
+</script>
+</body>
+</html>
