@@ -650,18 +650,169 @@ body {
   font-weight:600;font-size:.88rem;color:var(--text);
 }
 
-/* ── RESPONSIVE ──────────────────────────────── */
-@media(max-width:900px){
-  .sidebar{width:60px;}
-  .logo-name,.logo-title,.nav-item span,.sidebar-footer{display:none;}
-  .main{margin-left:60px;padding:1.5rem;}
-  .hero-grid{grid-template-columns:1fr;}
-  .grid-2,.grid-3{grid-template-columns:1fr;}
-  .smart-grid{grid-template-columns:1fr;}
+/* ── HAMBURGER BUTTON ───────────────────────── */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 1rem; left: 1rem;
+  z-index: 200;
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.hamburger span {
+  display: block;
+  width: 20px; height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all .3s ease;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ── OVERLAY ────────────────────────────────── */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.sidebar-overlay.visible {
+  display: block;
+  opacity: 1;
+}
+
+/* ── RESPONSIVE: TABLET ─────────────────────── */
+@media (max-width: 1024px) {
+  .main { padding: 2rem; }
+  .hero-desc { max-width: 100%; }
+  .page-title { font-size: 1.85rem; }
+}
+
+/* ── RESPONSIVE: SMALL TABLET ───────────────── */
+@media (max-width: 900px) {
+  .sidebar { width: 60px; }
+  .logo-name, .logo-title, .nav-item span, .sidebar-footer { display: none; }
+  .sidebar-logo { padding: 1.5rem .75rem 1rem; display:flex; flex-direction:column; align-items:center; }
+  .logo-avatar { margin-bottom: 0; }
+  .nav-item { justify-content: center; padding: .7rem; }
+  .main { margin-left: 60px; padding: 1.5rem; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .smart-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .stat-num { font-size: 2rem; }
+}
+
+/* ── RESPONSIVE: MOBILE ─────────────────────── */
+@media (max-width: 640px) {
+  .hamburger { display: flex; }
+
+  .sidebar {
+    width: 280px;
+    transform: translateX(-100%);
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+    box-shadow: none;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 8px 0 32px rgba(0,0,0,0.15);
+  }
+  .sidebar.open .logo-name,
+  .sidebar.open .logo-title,
+  .sidebar.open .nav-item span,
+  .sidebar.open .sidebar-footer { display: flex; }
+  .sidebar.open .sidebar-footer { display: block; }
+  .sidebar.open .sidebar-logo {
+    padding: 2rem 1.75rem 1.5rem;
+    align-items: flex-start;
+  }
+  .sidebar.open .logo-avatar { margin-bottom: .75rem; }
+  .sidebar.open .nav-item { justify-content: flex-start; padding: .7rem 1rem; }
+
+  .main {
+    margin-left: 0;
+    padding: 1.25rem;
+    padding-top: 4.5rem;
+  }
+
+  .page-header { margin-bottom: 1.5rem; padding-bottom: 1rem; }
+  .page-title { font-size: 1.5rem; }
+  .page-eyebrow { font-size: .6rem; }
+
+  .hero-name { font-size: clamp(1.6rem, 7vw, 2.5rem) !important; }
+  .hero-role { font-size: .7rem; }
+  .hero-desc { font-size: .85rem; }
+  .hero-actions { flex-direction: column; gap: .75rem; }
+  .hero-actions a, .hero-actions button { width: 100%; justify-content: center; text-align: center; }
+  .badge-row { gap: .5rem; }
+  .badge { font-size: .7rem; padding: .35rem .7rem; }
+
+  .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 1rem; }
+  .smart-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+  .card { padding: 1.25rem; }
+  .stat-card { padding: 1.25rem; }
+  .stat-num { font-size: 1.75rem; }
+  .stat-label { font-size: .68rem; }
+
+  .timeline { padding-left: 1.5rem; }
+  .timeline-item { padding-left: 1rem; margin-bottom: 1.25rem; }
+  .timeline-card { padding: 1.15rem; }
+  .timeline-role { font-size: .92rem; }
+  .timeline-desc { font-size: .8rem; }
+
+  .formation-card { padding: 1.25rem; }
+  .formation-school { font-size: 1rem; }
+
+  .project-card { border-radius: var(--radius); }
+  .project-img-strip img { height: 140px; }
+  .project-img-strip.cols-3 { grid-template-columns: 1fr; }
+  .project-img-strip.cols-3 img:nth-child(n+2) { display: none; }
+  .project-body { padding: 1.15rem; }
+  .project-title { font-size: .95rem; }
+
+  .certif-card { padding: 1rem 1.15rem; gap: 1rem; }
+
+  .chat-wrap { border-radius: var(--radius); }
+  .chat-msgs { height: 300px; padding: 1rem; }
+  .chat-header { padding: 1rem 1.15rem; }
+  .msg-bub { max-width: 85%; font-size: .8rem; }
+  .chat-input { font-size: .85rem; }
+  .chat-send { font-size: .75rem; padding: .55rem 1rem; }
+  .sugg { font-size: .68rem; padding: .35rem .7rem; }
+
+  .contact-item { padding: 1rem 1.15rem; }
+  .contact-value { font-size: .82rem; }
+
+  .skill-name { font-size: .78rem; }
+  .skill-pct { font-size: .65rem; }
 }
 </style>
 </head>
 <body>
+
+<!-- ── HAMBURGER (mobile) ─────────────────── -->
+<button class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileNav()"></div>
 
 <!-- ── SIDEBAR ─────────────────────────────── -->
 <aside class="sidebar">
@@ -705,9 +856,9 @@ body {
   </nav>
 
   <div class="sidebar-footer">
-    <a href="/cdn-cgi/l/email-protection#0460626f656a63666d61446369656d682a676b69" class="sidebar-contact-link">
+    <a href="mailto:dfkangbie@gmail.com" class="sidebar-contact-link">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      <span class="__cf_email__" data-cfemail="e2868489838c85808b87a2858f838b8ecc818d8f">[email&#160;protected]</span>
+      dfkangbie@gmail.com
     </a>
     <a href="tel:0641252735" class="sidebar-contact-link">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 010 .18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
@@ -728,11 +879,11 @@ body {
         <div class="hero-role">Data Analyst &amp; Data Scientist</div>
         <p class="hero-desc">Spécialisé dans la transformation de la donnée brute en insights stratégiques. Expérimenté en BI, reporting financier et machine learning dans le secteur bancaire et la finance.</p>
         <div class="hero-actions">
-          <a href="/cdn-cgi/l/email-protection#187c7e7379767f7a717d587f75797174367b7775" class="btn-primary">
+          <a href="javascript:void(0)" onclick="document.querySelector('[onclick*=contact]').click()" class="btn-primary">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Me contacter
           </a>
-          <a href="https://linkedin.com/in/damtoti.kangbie" target="_blank" class="btn-secondary">
+          <a href="https://www.linkedin.com/in/damtoti-kangbie-216531252" target="_blank" class="btn-secondary">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
             LinkedIn
           </a>
@@ -1011,7 +1162,7 @@ body {
       </div>
       <div class="formation-card" style="border-left-color:var(--green);">
         <div class="formation-school">Université de Pau et des Pays de l'Adour</div>
-        <div class="formation-degree">Maîtrise — Commerce, Économie &amp; Management</div>
+        <div class="formation-degree">Maîtrise — Chargé d'Études Économiques et de Marchés</div>
         <div class="formation-period">2023 → 2024 · Pau</div>
         <div class="formation-desc">Solides bases en méthodes quantitatives appliquées à l'économie et au management. Modules : Économétrie, Statistiques descriptives et inférentielles, Analyse financière, Gestion de portefeuille.</div>
         <div style="margin-top:.85rem;"><span class="tag green">Économétrie</span><span class="tag green">Statistiques</span><span class="tag green">Finance</span></div>
@@ -1087,11 +1238,11 @@ body {
     </div>
     <p style="font-size:.88rem;color:var(--text2);margin-bottom:1.75rem;max-width:520px;line-height:1.7;">Disponible à partir de <strong>septembre 2025</strong> pour toute opportunité en France — Data Analytics, Data Science ou Business Intelligence.</p>
     <div class="contact-grid">
-      <a href="/cdn-cgi/l/email-protection#9df9fbf6fcf3fafff4f8ddfaf0fcf4f1b3fef2f0" class="contact-item">
+      <a href="mailto:dfkangbie@gmail.com" class="contact-item">
         <div class="contact-icon">📧</div>
         <div>
           <div class="contact-label">Email</div>
-          <div class="contact-value"><span class="__cf_email__" data-cfemail="6602000d070801040f0326010b070f0a4805090b">[email&#160;protected]</span></div>
+          <div class="contact-value">dfkangbie@gmail.com</div>
         </div>
       </a>
       <a href="tel:0641252735" class="contact-item">
@@ -1101,11 +1252,11 @@ body {
           <div class="contact-value">06 41 25 27 35</div>
         </div>
       </a>
-      <a href="https://linkedin.com/in/damtoti.kangbie" target="_blank" class="contact-item">
+      <a href="https://www.linkedin.com/in/damtoti-kangbie-216531252" target="_blank" class="contact-item">
         <div class="contact-icon">💼</div>
         <div>
           <div class="contact-label">LinkedIn</div>
-          <div class="contact-value">damtoti.kangbie</div>
+          <div class="contact-value">damtoti-kangbie</div>
         </div>
       </a>
       <a href="https://portfolio.damtoti" target="_blank" class="contact-item">
@@ -1125,6 +1276,24 @@ body {
 </main>
 
 <script>
+// ── MOBILE NAVIGATION ────────────────────────
+function toggleMobileNav() {
+  var sidebar = document.querySelector('.sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  var hamburger = document.getElementById('hamburger');
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('visible');
+  hamburger.classList.toggle('active');
+}
+function closeMobileNav() {
+  var sidebar = document.querySelector('.sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  var hamburger = document.getElementById('hamburger');
+  sidebar.classList.remove('open');
+  overlay.classList.remove('visible');
+  hamburger.classList.remove('active');
+}
+
 // ── PAGE NAVIGATION ───────────────────────────
 function showPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1132,6 +1301,10 @@ function showPage(id, btn) {
   document.getElementById('page-' + id).classList.add('active');
   btn.classList.add('active');
   if (id === 'competences') animateSkills();
+  // Close mobile nav on page change
+  closeMobileNav();
+  // Scroll to top on page change
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── SKILL BARS ────────────────────────────────
@@ -1158,7 +1331,7 @@ const KB = [
   },
   {
     keys: ['formation','diplome','ecole','eslsca','nexa','pau','master','mba'],
-    answer: "Damtoti a suivi 3 formations :\n\n**MBA Finance et Data Performance** - ESLSCA (2025 a present)\n**Master Data et IA** - NEXA Digital School (2024-2025)\n**Maitrise CEEM** - Universite de Pau (2023-2024)"
+    answer: "Damtoti a suivi 3 formations :\n\n**MBA Finance et Data Performance** - ESLSCA (2025 a present)\n**Master Data et IA** - NEXA Digital School (2024-2025)\n**Maitrise Charge d'Etudes Economiques et de Marches** - Universite de Pau et des Pays de l'Adour (2023-2024)"
   },
   {
     keys: ['certification','certif','microsoft','amf','pl-300'],
@@ -1174,7 +1347,7 @@ const KB = [
   },
   {
     keys: ['contact','email','telephone','linkedin','joindre'],
-    answer: "Pour contacter Damtoti :\n\n dfkangbie@gmail.com\n 06 41 25 27 35\n linkedin.com/in/damtoti.kangbie\n\n Base a Paris - disponible en France des septembre 2025."
+    answer: "Pour contacter Damtoti :\n\n dfkangbie@gmail.com\n 06 41 25 27 35\n linkedin.com/in/damtoti-kangbie-216531252\n\n Base a Paris - disponible en France des septembre 2025."
   },
   {
     keys: ['qui','presentation','profil','damtoti','kangbie','bonjour','salut','hello'],
