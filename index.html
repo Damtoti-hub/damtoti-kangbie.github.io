@@ -1472,174 +1472,302 @@ var dkMailto = 'mai' + 'lto:' + dkMail;
 
 // ── SMART AGENT ───────────────────────────────
 const KB = [
+  // ── SALUTATIONS / CONVERSATION ─────────────
+  {
+    keys: ['bonjour','bonsoir','salut','hello','hi','hey','yo','coucou','bienvenue'],
+    answer: "Bonjour et bienvenue ! 👋😊\n\nJe suis l'assistant virtuel de **Damtoti KANGBIE**, Data Analyst & Data Scientist.\n\nJe suis la pour repondre a toutes vos questions sur son profil, ses competences, ses experiences ou sa disponibilite.\n\nPar ou souhaitez-vous commencer ? 🚀"
+  },
+  {
+    keys: ['ca va','comment vas','comment allez','how are','quoi de neuf','la forme'],
+    answer: "Tout va tres bien, merci de demander ! 😊\n\nJe suis pret a repondre a toutes vos questions sur Damtoti. Que souhaitez-vous savoir ?\n\n💡 **Idees de questions :**\n- Quelles sont ses competences ?\n- Parlez-moi de ses experiences\n- Est-il disponible ?\n- Quelles sont ses pretentions salariales ?"
+  },
+  {
+    keys: ['au revoir','bonne journee','bonne soiree','a bientot','bye','ciao','adieu','a plus'],
+    answer: "Merci pour votre visite et votre interet pour le profil de Damtoti ! 🙏😊\n\nN'hesitez pas a revenir si vous avez d'autres questions.\n\n📧 " + dkMail + "\n📞 06 41 25 27 35\n💼 linkedin.com/in/damtoti-kangbie-216531252\n\nBonne continuation ! 👋"
+  },
+  {
+    keys: ['merci','remercie','super','genial','parfait','top','excellent','bravo','bien','cool','formidable','impressionnant','interessant','tres bien','ok merci','d accord','entendu'],
+    answer: "Avec plaisir ! 😊 Ravi que les informations vous soient utiles.\n\nSi vous souhaitez aller plus loin avec Damtoti, voici comment le joindre :\n📧 " + dkMail + "\n📞 06 41 25 27 35\n💼 linkedin.com/in/damtoti-kangbie-216531252\n\nIl est toujours disponible pour echanger ! 🤝"
+  },
   // ── PRÉSENTATION / PROFIL ──────────────────
   {
-    keys: ['qui','presentation','profil','damtoti','kangbie','bonjour','salut','hello','presentez','cv','resume','parcours','a propos','about','candidat','cest qui'],
-    answer: "Damtoti KANGBIE est **Data Analyst & Data Scientist** base a Paris.\n\nActuellement en alternance chez **Credit Foncier | BPCE**, il est specialise en **BI, reporting financier et machine learning** dans le secteur bancaire.\n\n**Formation :** MBA Finance & Data (ESLSCA), Master Data & IA (NEXA), Maitrise CEEM (Univ. Pau)\n**Certifications :** PL-300 Microsoft Power BI, Chef de projet Data & IA\n**Langues :** Francais (natif), Anglais (professionnel)\n\nDisponible pour de nouvelles opportunites en France **des septembre 2025**."
+    keys: ['qui','presentation','profil','presentez','cv','resume','parcours','a propos','about','candidat','cest qui','dites moi','parlez moi','decrire','decrivez','raconte','racontez'],
+    answer: "Avec plaisir ! Voici le profil de Damtoti en un coup d'oeil 👇\n\n**Damtoti KANGBIE** — Data Analyst & Data Scientist, base a Paris 🇫🇷\n\n🏦 **Poste actuel :** Charge d'Etudes en alternance chez **Credit Foncier (BPCE)** — dashboards Power BI pour la tresorerie\n\n🎓 **Formation :**\n- MBA Finance & Data Performance (ESLSCA)\n- Master Data & IA (NEXA Digital School)\n- Maitrise CEEM (Universite de Pau)\n\n🏅 **Certifications :** PL-300 Microsoft Power BI, Chef de projet Data & IA\n\n🛠️ **Stack :** Power BI, Python, SQL, Excel/VBA, Machine Learning\n\n🌍 **Langues :** Francais (natif) + Anglais (professionnel)\n\n📅 **Disponible des septembre 2025** — ouvert aux CDI dans la data/finance\n\nQue souhaitez-vous approfondir ? 😊"
   },
   // ── COMPÉTENCES TECHNIQUES ─────────────────
   {
-    keys: ['competence','competences','outil','outils','maitrise','technologie','stack','technique','hard skill','savoir faire','logiciel','logiciels','software','tech'],
-    answer: "Damtoti maitrise un large stack Data :\n\n**BI & Reporting :** Power BI (DAX, Power Query M), Tableau, QlikView, Excel/VBA\n**Langages :** Python (pandas, numpy, seaborn, scikit-learn, matplotlib), SQL, SAS, VBA\n**Data Science & ML :** Machine Learning (regression, classification, clustering, arbres de decision), Statistiques, Econometrie, Series temporelles (SARIMAX)\n**Cloud & Big Data :** AWS, Azure, Big Data, Elasticsearch\n**Bases de donnees :** SQL Server, MySQL, PostgreSQL\n**Autres :** Web scraping, ETL, Data Governance, Git, Jupyter Notebook, Google Sheets"
+    keys: ['competence','competences','outil','outils','maitrise','technologie','stack','technique','hard skill','savoir faire','logiciel','logiciels','software','tech','sait faire','capable'],
+    answer: "Damtoti a un stack technique solide et diversifie 💪\n\n**📊 BI & Reporting :**\nPower BI (DAX, Power Query M, rapports pagines), Tableau, QlikView, Excel/VBA\n\n**🐍 Langages & Programmation :**\nPython (pandas, numpy, scikit-learn, seaborn, matplotlib), SQL, SAS, VBA\n\n**🤖 Data Science & ML :**\nRegression, Classification, Clustering, Arbres de decision, Random Forest, SARIMAX, Econometrie\n\n**☁️ Cloud & Infrastructure :**\nAWS, Azure, Elasticsearch, Big Data\n\n**🗄️ Bases de donnees :**\nSQL Server, MySQL, PostgreSQL\n\n**🔧 Outils :**\nGit, Jupyter, VS Code, SharePoint, Power Automate, Google Sheets\n\nSon point fort ? La **double competence Finance + Data**, rare sur le marche ! 🎯"
   },
   // ── POWER BI ───────────────────────────────
   {
-    keys: ['power bi','powerbi','dax','power query','dashboard','tableau de bord','reporting','rapport','visualisation','dataviz','kpi'],
-    answer: "Damtoti est **certifie Microsoft Power BI (PL-300)** et utilise Power BI quotidiennement :\n\n**Competences Power BI :**\n- Modelisation de donnees (schemas en etoile, relations)\n- DAX avance (mesures calculees, time intelligence, KPI)\n- Power Query M (transformations, nettoyage, ETL)\n- Dashboards interactifs, rapports pagines\n- Connexion multi-sources (SQL, SharePoint, CRM, API)\n\n**Projets realises :**\n- Dashboard tresorerie (Credit Foncier | BPCE)\n- Campagne Pret Personnel (5k clients, 9.6% taux acceptation)\n- Controle de Gestion, Maven Cycles, Abeilles Assurance\n- Reporting multi-sources (Neuflize OBC)"
+    keys: ['power bi','powerbi','dax','power query','dashboard','tableau de bord','reporting','rapport','visualisation','dataviz','kpi','indicateur'],
+    answer: "Power BI, c'est LE point fort de Damtoti ! Il est **certifie PL-300** 🏅\n\n**Ce qu'il maitrise :**\n📐 Modelisation de donnees (schemas en etoile, relations)\n📏 DAX avance (mesures calculees, time intelligence, KPI dynamiques)\n🔄 Power Query M (transformations, nettoyage, ETL automatise)\n📊 Dashboards interactifs et rapports pagines\n🔗 Connexion multi-sources (SQL, SharePoint, CRM, API, Excel)\n📱 Publication et partage (Power BI Service, Row-Level Security)\n\n**Exemples concrets :**\n- 📈 Dashboard tresorerie pour Credit Foncier | BPCE\n- 🏦 Campagne Pret Personnel (5k clients, 9.6% acceptation)\n- 📊 Reporting multi-sources chez Neuflize OBC\n- 💰 Controle de Gestion, Maven Cycles, Abeilles Assurance\n\nVous avez un besoin specifique en Power BI ? Damtoti adore en parler ! 😄"
   },
   // ── PYTHON / DATA SCIENCE ──────────────────
   {
-    keys: ['python','pandas','scikit','machine learning','ml','ia','intelligence artificielle','data science','algorithme','modele','modelisation','prediction','prevision','sarimax','regression','classification','clustering'],
-    answer: "Damtoti utilise **Python** pour l'analyse de donnees et le **Machine Learning** :\n\n**Librairies :** pandas, numpy, scikit-learn, seaborn, matplotlib, statsmodels\n**Techniques ML :** Regression lineaire/logistique, Arbres de decision, Random Forest, Clustering (K-Means), Series temporelles (SARIMAX)\n**Applications :** Web scraping, analyse exploratoire (EDA), nettoyage de donnees, feature engineering, visualisation\n\n**Projets Python :**\n- Prevision SARIMAX (series temporelles)\n- Arbres de decision (classification)\n- Analyse exploratoire de donnees (Pokemon dataset)\n- Pipelines de web scraping (Gaea21, Geneve)"
+    keys: ['python','pandas','scikit','machine learning','ml','ia','intelligence artificielle','data science','algorithme','modele','modelisation','prediction','prevision','sarimax','regression','classification','clustering','deep learning','nlp'],
+    answer: "Damtoti utilise Python au quotidien pour la data 🐍\n\n**Librairies maitrisees :**\npandas, numpy, scikit-learn, seaborn, matplotlib, statsmodels, BeautifulSoup\n\n**Techniques ML :**\n🔵 Regression lineaire & logistique\n🌳 Arbres de decision, Random Forest\n🎯 Classification supervisee\n📍 Clustering (K-Means)\n📈 Series temporelles (SARIMAX, decomposition)\n🔍 Feature engineering, cross-validation\n\n**Projets concrets :**\n- 📈 Prevision SARIMAX — modelisation de series temporelles\n- 🌳 Arbres de decision — classification supervisee\n- 🔬 Analyse exploratoire Pokemon — EDA complete\n- 🕷️ Pipelines web scraping — collecte automatisee (Gaea21)\n\nIl continue a se former en Deep Learning et NLP dans le cadre de son MBA ! 📚"
   },
   // ── SQL / BASES DE DONNÉES ─────────────────
   {
-    keys: ['sql','base','donnee','donnees','database','requete','query','sgbd','mysql','postgresql','server'],
-    answer: "Damtoti a une solide maitrise de **SQL** :\n\n- Requetes complexes (JOIN, sous-requetes, CTE, fonctions fenetrees)\n- Manipulation de donnees (INSERT, UPDATE, DELETE)\n- Optimisation de requetes\n- SQL Server, MySQL, PostgreSQL\n- Integration avec Power BI, Python (SQLAlchemy, pyodbc)\n\nIl utilise SQL quotidiennement dans ses missions pour extraire, transformer et analyser les donnees."
+    keys: ['sql','base','donnee','donnees','database','requete','query','sgbd','mysql','postgresql','server','bdd'],
+    answer: "SQL, c'est la base de tout bon Data Analyst — et Damtoti le maitrise parfaitement ! 💾\n\n**Competences SQL :**\n- Requetes complexes (JOIN multiples, sous-requetes, CTE)\n- Fonctions fenetrees (RANK, ROW_NUMBER, LAG/LEAD)\n- Agregation et groupement avances\n- Creation de vues, procedures stockees\n- Optimisation de performances\n\n**SGBD utilises :**\nSQL Server, MySQL, PostgreSQL\n\n**Integration :**\nConnexion Power BI ↔ SQL, Python (SQLAlchemy, pyodbc)\n\nIl utilise SQL **quotidiennement** dans toutes ses missions ! 🚀"
   },
   // ── EXCEL / VBA ────────────────────────────
   {
-    keys: ['excel','vba','tableur','spreadsheet','macro','google sheets','feuille de calcul'],
-    answer: "Damtoti est expert **Excel / VBA** :\n\n- Formules avancees (RECHERCHEV/X, INDEX-EQUIV, tableaux dynamiques)\n- Tableaux croises dynamiques, Power Pivot\n- Macros VBA (automatisation de processus)\n- Dashboard Pilotage Commercial (CA 645k€, 9 360 clients)\n- Google Sheets (formules, scripts)\n\nExcel reste un outil central dans ses missions de reporting et d'analyse."
+    keys: ['excel','vba','tableur','spreadsheet','macro','google sheets','feuille de calcul','pivot'],
+    answer: "Excel n'a (presque) plus de secrets pour Damtoti ! 📗\n\n**Competences avancees :**\n- Formules complexes (RECHERCHEV/X, INDEX-EQUIV, SOMMEPROD)\n- Tableaux croises dynamiques, Power Pivot, Power Query\n- Macros VBA — automatisation complete de processus\n- Mise en forme conditionnelle avancee\n- Connexion donnees externes\n\n**Projet phare :**\n📈 Dashboard Pilotage Commercial — **CA 645k€, 9 360 clients**, KPI de performance\n\nExcel + VBA restent des outils centraux dans ses missions de reporting ! 💪"
   },
   // ── EXPÉRIENCES PROFESSIONNELLES ───────────
   {
-    keys: ['experience','experiences','travail','poste','bpce','neuflize','gaea','cepac','alternance','stage','mission','missions','emploi','emplois','parcours professionnel','carriere'],
-    answer: "Damtoti a **4 experiences professionnelles** :\n\n**1. Credit Foncier | BPCE** — Charge d'Etudes (alternance, 09/2025 - present)\n→ Dashboards Power BI tresorerie, automatisation controles qualite collateraux, DAX & Power Query M\n\n**2. Neuflize OBC (ABN AMRO)** — Customer Data Analyst (alternance, 09/2024 - 09/2025)\n→ Dashboards dynamiques, reporting multi-sources (CRM, SharePoint, QlikView), KPI, dictionnaire DDS, gouvernance data\n\n**3. Gaea21** — Data Analyst (stage, 06-08/2024, Geneve)\n→ Web scraping Python, reportings Power BI, donnees environnementales open-source\n\n**4. CEPAC | BPCE** — Gestionnaire de clientele (stage, 03-08/2023, Guadeloupe)\n→ Conseil clients, analyse financiere, gestion risques portefeuille"
+    keys: ['experience','experiences','travail','poste','alternance','stage','mission','missions','emploi','emplois','parcours professionnel','carriere','a travaille','ou a t il','entreprise'],
+    answer: "Damtoti a accumule **4 experiences solides** en 2 ans — voici son parcours 📋\n\n**1. 🏦 Credit Foncier | BPCE** — Charge d'Etudes (alternance, 09/2025 → present)\n→ Dashboards Power BI tresorerie, automatisation controles qualite, DAX & Power Query M\n\n**2. 💎 Neuflize OBC (ABN AMRO)** — Customer Data Analyst (alternance, 09/2024 → 09/2025)\n→ Dashboards multi-sources (CRM, SharePoint, QlikView), KPI, gouvernance data\n\n**3. 🌍 Gaea21** — Data Analyst (stage, 06 → 08/2024, Geneve 🇨🇭)\n→ Web scraping Python, reportings Power BI, donnees environnementales\n\n**4. 🏝️ CEPAC | BPCE** — Gestionnaire de clientele (stage, 03 → 08/2023, Guadeloupe)\n→ Conseil clients, analyse financiere, gestion risques portefeuille\n\nUn parcours progressif, du terrain metier vers la data analytics ! 🚀"
   },
   // ── CREDIT FONCIER / POSTE ACTUEL ──────────
   {
-    keys: ['credit foncier','poste actuel','actuellement','en ce moment','fait quoi','role actuel','mission actuelle','tresorerie'],
-    answer: "Damtoti est actuellement **Charge d'Etudes en alternance** chez **Credit Foncier (BPCE)** depuis septembre 2025 :\n\n**Missions :**\n- Conception de tableaux de bord **Power BI** pour le suivi operationnel de la tresorerie\n- Automatisation des controles qualite des collateraux via **DAX** et **Power Query M**\n- Reporting et analyse pour les equipes tresorerie\n\n**Environnement :** Power BI, DAX, Power Query, SQL, secteur bancaire"
+    keys: ['credit foncier','poste actuel','actuellement','en ce moment','fait quoi','role actuel','mission actuelle','tresorerie','bpce'],
+    answer: "Actuellement, Damtoti est chez **Credit Foncier (Groupe BPCE)** 🏦\n\n**Poste :** Charge d'Etudes en alternance (depuis 09/2025)\n\n**Ses missions au quotidien :**\n📊 Conception de dashboards **Power BI** pour le suivi operationnel de la tresorerie\n🔄 Automatisation des controles qualite des collateraux via **DAX** et **Power Query M**\n📋 Reporting et analyse pour les equipes tresorerie\n🗂️ Travail avec des donnees financieres sensibles\n\n**Environnement technique :** Power BI, DAX, Power Query, SQL\n**Secteur :** Banque / Tresorerie\n\nC'est une experience tres formatrice dans un contexte bancaire exigeant ! 💪"
   },
   // ── NEUFLIZE OBC ───────────────────────────
   {
-    keys: ['neuflize','obc','abn amro','customer data','crm','sharepoint','qlikview','gouvernance'],
-    answer: "Chez **Neuflize OBC (Groupe ABN AMRO)**, Damtoti etait **Customer Data Analyst** en alternance (09/2024 - 09/2025) :\n\n**Missions :**\n- Creation de dashboards dynamiques multi-sources (CRM, SharePoint, QlikView)\n- Automatisation des KPI et reportings\n- Elaboration du dictionnaire de donnees DDS pour la gouvernance data\n- Reporting a destination des equipes commerciales et direction\n\n**Environnement :** Power Query, QlikView, SharePoint, Data Governance"
+    keys: ['neuflize','obc','abn amro','customer data','crm','qlikview','gouvernance','banque privee'],
+    answer: "Chez **Neuflize OBC** (banque privee du Groupe ABN AMRO) 💎\n\n**Poste :** Customer Data Analyst en alternance (09/2024 → 09/2025)\n\n**Missions realisees :**\n📊 Dashboards dynamiques multi-sources (CRM, SharePoint, QlikView)\n🔢 Automatisation des KPI et reportings commerciaux\n📋 Elaboration du **dictionnaire de donnees DDS** pour la gouvernance\n📈 Reporting pour les equipes commerciales et la direction\n\n**Ce qu'il en retient :**\nUne experience dans le monde de la **banque privee** avec des exigences elevees en qualite de donnees et gouvernance. 🎯"
   },
   // ── FORMATIONS ─────────────────────────────
   {
-    keys: ['formation','formations','diplome','diplomes','ecole','eslsca','nexa','pau','master','mba','etude','etudes','cursus','universite','bac'],
-    answer: "Damtoti a suivi **3 formations** :\n\n🎓 **MBA Finance et Data Performance** — ESLSCA Business School (2025 - present)\nFinance de marche, gestion de portefeuille, data performance, strategie financiere\n\n🎓 **Master Data et Intelligence Artificielle** — NEXA Digital School (2024-2025)\nMachine Learning, Big Data, IA, Python, statistiques avancees\n\n🎓 **Maitrise Charge d'Etudes Economiques et de Marches** — Universite de Pau et des Pays de l'Adour (2023-2024)\nEconometrie, statistiques descriptives/inferentielles, analyse financiere, gestion de portefeuille"
+    keys: ['formation','formations','diplome','diplomes','ecole','eslsca','nexa','pau','master','mba','etude','etudes','cursus','universite','bac','niveau','academique','scolaire'],
+    answer: "Un parcours academique solide et progressif ! 🎓\n\n**🏛️ MBA Finance et Data Performance** — ESLSCA Business School (2025 → present)\nFinance de marche, gestion de portefeuille, data performance, strategie financiere, risk management\n\n**🤖 Master Data et Intelligence Artificielle** — NEXA Digital School (2024 → 2025)\nMachine Learning, Big Data, Python avance, IA, statistiques avancees, gestion de projet data\n\n**📊 Maitrise Charge d'Etudes Economiques et de Marches** — Universite de Pau et des Pays de l'Adour (2023 → 2024)\nEconometrie, statistiques descriptives/inferentielles, analyse financiere, gestion de portefeuille\n\nCe qui rend ce parcours unique : la **combinaison Finance + Data + IA** ! 🎯"
   },
   // ── CERTIFICATIONS ─────────────────────────
   {
     keys: ['certification','certifications','certif','certifie','microsoft','amf','pl-300','badge','accreditation'],
-    answer: "Damtoti possede **3 certifications** :\n\n✅ **Microsoft Power BI Data Analyst Associate (PL-300)** — Obtenu\nCertification officielle Microsoft couvrant la modelisation, DAX, visualisation et deploiement Power BI\n\n⏳ **Certification AMF** (Autorite des Marches Financiers) — En cours\nReglementation financiere, marches, produits financiers\n\n✅ **Chef de Projet Data et Intelligence Artificielle** — Obtenu\nGestion de projets data/IA, methodologies agiles, pilotage"
+    answer: "Damtoti detient **3 certifications** qui valident son expertise 🏅\n\n✅ **Microsoft Power BI Data Analyst Associate (PL-300)**\nLA certification de reference pour Power BI — modelisation, DAX, visualisation, deploiement et securite\n\n⏳ **Certification AMF** (Autorite des Marches Financiers) — En cours\nReglementation financiere, connaissance des marches et produits financiers\n\n✅ **Chef de Projet Data et Intelligence Artificielle**\nGestion de projets data/IA, methodologies agiles, pilotage, livrables\n\nLe PL-300 est particulierement valorise par les entreprises — c'est un vrai gage de qualite ! ⭐"
   },
   // ── PROJETS ────────────────────────────────
   {
-    keys: ['projet','projets','realisation','realisations','portfolio','book','pokemon','maven','assurance','abeilles','pilotage','campagne','pret personnel'],
-    answer: "Damtoti a realise **plusieurs projets concrets** :\n\n**Power BI :**\n📊 Campagne Pret Personnel — 5 000 clients, taux acceptation 9.6%, segmentation\n📊 Controle de Gestion — suivi budgetaire, ecarts, previsions\n📊 Maven Cycles Reporting — analyse ventes, tendances\n📊 Abeilles Assurance — reporting sinistralite\n\n**Excel :**\n📈 Dashboard Pilotage Commercial — CA 645k€, 9 360 clients, KPI performance\n\n**Python :**\n🐍 Analyse Pokemon — EDA, visualisation, statistiques\n🐍 Arbres de decision — classification supervisee\n🐍 Prevision SARIMAX — series temporelles, modelisation"
+    keys: ['projet','projets','realisation','realisations','portfolio','book','pokemon','maven','assurance','abeilles','pilotage','campagne','pret personnel','exemple','concret','cas'],
+    answer: "Voici les projets concrets realises par Damtoti — du reel, pas de la theorie ! 💼\n\n**📊 Power BI :**\n🏦 **Campagne Pret Personnel** — Analyse de 5 000 clients, taux d'acceptation de 9.6%, segmentation et ciblage\n💰 **Controle de Gestion** — Suivi budgetaire, analyse des ecarts, previsions\n🚲 **Maven Cycles Reporting** — Analyse des ventes, tendances et performance\n🐝 **Abeilles Assurance** — Reporting sinistralite et indicateurs\n\n**📈 Excel :**\n🎯 **Dashboard Pilotage Commercial** — CA de 645k€, 9 360 clients, KPI de performance commerciale\n\n**🐍 Python :**\n🔬 **Analyse Pokemon** — EDA complete, visualisation, statistiques descriptives\n🌳 **Arbres de decision** — Classification supervisee, optimisation\n📈 **Prevision SARIMAX** — Modelisation de series temporelles\n\nChaque projet montre sa capacite a **transformer la donnee en decisions business** ! 🚀"
   },
   // ── DISPONIBILITÉ ──────────────────────────
   {
-    keys: ['disponible','disponibilite','quand','date','debut','commencer','demarrer','preavis','libre'],
-    answer: "Damtoti sera **disponible a partir de septembre 2025** pour un nouveau poste.\n\n📅 **Debut :** Septembre 2025\n⏳ **Preavis :** Aucun (fin d'alternance)\n📍 **Mobilite :** Paris et toute la France\n🏠 **Mode :** Presentiel, hybride ou full remote\n\nContactez-le :\n📧 " + dkMail + "\n📞 06 41 25 27 35"
+    keys: ['disponible','disponibilite','quand','date','debut','commencer','demarrer','preavis','libre','rejoindre','integrer'],
+    answer: "Bonne nouvelle — Damtoti sera bientot disponible ! 🎉\n\n📅 **Date de disponibilite :** Septembre 2025\n⏳ **Preavis :** Aucun (fin d'alternance)\n📍 **Mobilite :** Paris, Ile-de-France et toute la France\n🏠 **Modes de travail :** Presentiel ✅ Hybride ✅ Full remote ✅\n✈️ **Deplacements :** OK ponctuellement\n\nIl est ouvert aux **echanges des maintenant** pour preparer son arrivee :\n📧 " + dkMail + "\n📞 06 41 25 27 35\n\nN'attendez pas septembre pour prendre contact ! 😊"
   },
   // ── SALAIRE / RÉMUNÉRATION ─────────────────
   {
-    keys: ['salaire','remuneration','pretention','combien','tjm','tarif','prix','package','brut','net'],
-    answer: "Concernant les **pretentions salariales**, Damtoti reste ouvert a la discussion selon :\n\n- Le type de poste (CDI, CDD, freelance)\n- La localisation et le mode de travail\n- Les responsabilites et le perimetre\n- Les avantages (teletravail, formation, etc.)\n\nIl vous invite a en discuter directement :\n📧 " + dkMail + "\n📞 06 41 25 27 35"
+    keys: ['salaire','remuneration','pretention','combien','tjm','tarif','prix','package','brut','net','paye','payer','gagne','gagner','argent','budget','cout','couter'],
+    answer: "Transparence totale ! 💰\n\n**Pretentions salariales :**\n🎯 **Fourchette cible :** 40 000 € — 45 000 € brut annuel\n\n**Neanmoins, Damtoti reste flexible** selon :\n- Le perimetre du poste et les responsabilites\n- Les avantages (teletravail, formation, interessement, tickets resto...)\n- Les perspectives d'evolution\n- La localisation (Paris vs province)\n- Le type de contrat (CDI, CDD, freelance)\n\nL'important pour lui, c'est surtout le **projet et l'environnement de travail** ! 🤝\n\nDiscutons-en :\n📧 " + dkMail + "\n📞 06 41 25 27 35"
   },
   // ── CONTACT ────────────────────────────────
   {
-    keys: ['contact','email','telephone','linkedin','joindre','appeler','ecrire','coordonnees','mail'],
-    answer: "Pour contacter Damtoti :\n\n📧 **Email :** " + dkMail + "\n📞 **Telephone :** 06 41 25 27 35\n💼 **LinkedIn :** linkedin.com/in/damtoti-kangbie-216531252\n\n📍 Base a Paris — disponible en France des septembre 2025.\n\nN'hesitez pas a le contacter pour toute opportunite !"
+    keys: ['contact','email','telephone','linkedin','joindre','appeler','ecrire','coordonnees','mail','numero','tel','portable','message','contacter'],
+    answer: "Voici toutes les coordonnees de Damtoti 📱\n\n📧 **Email :** " + dkMail + "\n📞 **Telephone :** 06 41 25 27 35\n💼 **LinkedIn :** linkedin.com/in/damtoti-kangbie-216531252\n\n📍 Base a **Paris, Ile-de-France**\n📅 Disponible des **septembre 2025**\n\nIl repond generalement **sous 24h** — n'hesitez pas ! 🚀"
   },
   // ── POURQUOI RECRUTER DAMTOTI ──────────────
   {
-    keys: ['pourquoi','recruter','embaucher','atout','atouts','valeur ajoutee','force','forces','qualite','qualites','point fort','avantage','difference','differencie','choisir'],
-    answer: "**Pourquoi recruter Damtoti ?**\n\n✅ **Double competence** Finance + Data rare sur le marche (MBA Finance & Data + Master IA)\n✅ **Certifie Microsoft PL-300** — expertise Power BI validee\n✅ **Experience bancaire** solide (BPCE, Neuflize OBC/ABN AMRO)\n✅ **Operationnel immediatement** — 4 experiences en Data Analytics\n✅ **Polyvalent** — Power BI, Python, SQL, Excel, Machine Learning\n✅ **Bilingue** francais/anglais\n✅ **Rigoureux et autonome** — habitue aux environnements exigeants (banque privee, tresorerie)"
+    keys: ['pourquoi','recruter','embaucher','atout','atouts','valeur ajoutee','force','forces','qualite','qualites','point fort','avantage','difference','differencie','choisir','meilleur','unique','special'],
+    answer: "Excellente question ! Voici pourquoi Damtoti se demarque 🌟\n\n✅ **Double competence Finance + Data** — un profil rare et tres recherche\n✅ **Certifie Microsoft PL-300** — expertise Power BI validee officiellement\n✅ **4 experiences en 2 ans** — operationnel immediatement, pas besoin de formation\n✅ **Secteur bancaire** — connait les enjeux (BPCE, Neuflize OBC/ABN AMRO)\n✅ **Polyvalent** — Power BI, Python, SQL, Excel, Machine Learning\n✅ **Bilingue FR/EN** — experience internationale (Suisse, ABN AMRO)\n✅ **Rigoureux et autonome** — environnements exigeants (banque privee, tresorerie)\n✅ **Passionne** — veille tech permanente, toujours en formation\n\nEn resume : un profil **operationnel, certifie et motive** ! 💪\n\nConvaincu ? Contactez-le : " + dkMail
   },
   // ── SOFT SKILLS ────────────────────────────
   {
-    keys: ['soft skill','soft skills','savoir etre','personnalite','caractere','comportement','equipe','travail equipe','communication','autonome','autonomie','rigoureux','rigueur','organise','adaptable','motivation','motive','curieux','curiosite'],
-    answer: "Les **qualites humaines** de Damtoti :\n\n🤝 **Esprit d'equipe** — collabore efficacement avec les metiers (finance, commercial, IT)\n📋 **Rigueur** — habitue aux environnements reglementaires (banque, AMF)\n🚀 **Autonomie** — gere ses projets de bout en bout\n💡 **Curiosite intellectuelle** — veille technologique permanente, formation continue\n🔄 **Adaptabilite** — s'est adapte a 4 environnements differents en 2 ans\n🗣️ **Communication** — sait vulgariser les resultats data pour les decideurs\n📈 **Orientation resultats** — KPI, impact business mesurable"
+    keys: ['soft skill','soft skills','savoir etre','personnalite','caractere','comportement','equipe','travail equipe','communication','autonome','autonomie','rigoureux','rigueur','organise','adaptable','motivation','motive','curieux','curiosite','humain','relationnel','interpersonnel'],
+    answer: "Au-dela de la technique, voici les qualites humaines de Damtoti 🤝\n\n**🤝 Esprit d'equipe** — collabore naturellement avec les metiers (finance, commercial, IT). Il sait ecouter et s'adapter.\n\n**📋 Rigueur & Fiabilite** — forme aux environnements reglementaires (banque, AMF). On peut compter sur lui.\n\n**🚀 Autonomie** — gere ses projets de A a Z, prend des initiatives.\n\n**💡 Curiosite intellectuelle** — veille techno permanente, toujours en train d'apprendre.\n\n**🔄 Adaptabilite** — 4 environnements differents en 2 ans (banque privee, ONG, tresorerie), chaque fois avec succes.\n\n**🗣️ Communication** — sait vulgariser les resultats data pour les decideurs non-techniques.\n\n**🎯 Orientation resultats** — raisonne en KPI et impact business mesurable.\n\n**😊 Bienveillance** — positif, agreable a vivre au quotidien dans une equipe !"
   },
   // ── LANGUES ────────────────────────────────
   {
-    keys: ['langue','langues','anglais','francais','english','french','bilingue','parle'],
-    answer: "Damtoti parle **2 langues** :\n\n🇫🇷 **Francais** — Langue maternelle\n🇬🇧 **Anglais** — Niveau professionnel (B2/C1)\n\nIl a travaille dans un environnement international chez **Neuflize OBC (Groupe ABN AMRO)** et en **Suisse (Gaea21, Geneve)**."
+    keys: ['langue','langues','anglais','francais','english','french','bilingue','parle','international','etranger'],
+    answer: "Damtoti evolue dans des environnements bilingues ! 🌍\n\n🇫🇷 **Francais** — Langue maternelle\n🇬🇧 **Anglais** — Niveau professionnel (B2/C1)\n\n**Experience internationale :**\n- 💎 **Neuflize OBC (Groupe ABN AMRO)** — contexte international, documentation en anglais\n- 🇨🇭 **Gaea21, Geneve** — stage dans un environnement multiculturel\n\nIl est a l'aise pour travailler en **anglais au quotidien** (reunions, mails, documentation technique). 📝"
   },
   // ── CENTRES D'INTÉRÊT ──────────────────────
   {
-    keys: ['interet','interets','passion','hobby','loisir','loisirs','football','cuisine','sport','temps libre','hors travail'],
-    answer: "En dehors du travail, Damtoti est passionne de :\n\n⚽ **Football** — pratique reguliere, esprit d'equipe et competitivite\n🍳 **Cuisine** — creativite et precision\n\nCes passions refletent ses qualites : travail d'equipe, discipline et souci du detail."
+    keys: ['interet','interets','passion','hobby','loisir','loisirs','football','cuisine','sport','temps libre','hors travail','vie perso','personnel'],
+    answer: "En dehors du travail, Damtoti est quelqu'un de passionne ! 😊\n\n⚽ **Football** — Pratique reguliere. Ca lui a appris l'**esprit d'equipe**, la **strategie** et la **perseverance**.\n\n🍳 **Cuisine** — Il adore creer de nouvelles recettes. Ca reflete sa **creativite** et son **attention au detail**.\n\n📚 **Veille tech** — Il suit l'actualite data/IA et teste regulierement de nouveaux outils.\n\nCes passions ne sont pas anodines — elles nourrissent ses qualites professionnelles ! 🎯"
   },
   // ── MOBILITÉ / LOCALISATION ────────────────
   {
-    keys: ['mobilite','localisation','ou','ville','region','paris','france','remote','teletravail','hybride','presentiel','lieu','deplacer','demenager','geographique'],
-    answer: "📍 **Localisation actuelle :** Paris, Ile-de-France\n\n**Mobilite :**\n- ✅ Paris et Ile-de-France\n- ✅ Toute la France (pret a demenager)\n- ✅ Presentiel, hybride ou full remote\n- ✅ Deplacements ponctuels possibles\n\nDisponible des **septembre 2025**."
+    keys: ['mobilite','localisation','ou','ville','region','paris','france','remote','teletravail','hybride','presentiel','lieu','deplacer','demenager','geographique','habite','reside','domicile'],
+    answer: "📍 **Localisation actuelle :** Paris, Ile-de-France\n\n**Mobilite :**\n✅ Paris et Ile-de-France — ideal\n✅ Toute la France — pret a demenager si le projet est motivant\n✅ Presentiel, hybride ou full remote — flexible\n✈️ Deplacements ponctuels — aucun probleme\n\n📅 Disponible des **septembre 2025**\n\nDamtoti privilegia un poste a Paris/IDF mais reste **tres ouvert** si l'opportunite est belle ! 😊"
   },
   // ── TYPE DE POSTE RECHERCHÉ ────────────────
   {
-    keys: ['type poste','recherche','cherche','souhaite','ideal','objectif','ambition','cdi','cdd','freelance','contrat','quel poste','quel type','mission','intitule'],
-    answer: "Damtoti recherche un poste en :\n\n🎯 **Data Analyst** / **Data Scientist** / **BI Analyst**\n🏦 **Secteurs privilegies :** Banque, Finance, Assurance, Conseil\n📋 **Type de contrat :** CDI (privilegie), CDD, Freelance\n\n**Ce qu'il recherche :**\n- Un environnement stimulant et data-driven\n- Des projets a fort impact business\n- La possibilite de monter en competences (ML, Cloud)\n- Une equipe collaborative"
+    keys: ['type poste','recherche','cherche','souhaite','ideal','objectif','ambition','cdi','cdd','freelance','contrat','quel poste','quel type','intitule','veut','voudrait','aspire','envie','reve','projet professionnel','plan carriere'],
+    answer: "Voici ce que Damtoti recherche pour la suite de sa carriere 🎯\n\n**Postes cibles :**\n💼 Data Analyst / BI Analyst / Data Scientist\n\n**Secteurs privilegies :**\n🏦 Banque, Finance, Assurance, Fintech, Conseil\n\n**Type de contrat :**\n📋 CDI (privilegie), CDD ou Freelance\n\n**Ce qui le motive :**\n🚀 Un environnement stimulant et data-driven\n📊 Des projets a fort impact business\n📈 La possibilite de monter en competences (ML, Cloud, Deep Learning)\n🤝 Une equipe collaborative et bienveillante\n🎓 Un employeur qui investit dans la formation\n\nSi votre entreprise correspond, parlons-en ! 😊\n📧 " + dkMail
   },
   // ── SECTEUR / INDUSTRIE ────────────────────
   {
-    keys: ['secteur','industrie','domaine','banque','finance','assurance','conseil','fintech'],
-    answer: "Damtoti a une **expertise sectorielle forte** :\n\n🏦 **Banque** — Credit Foncier (BPCE), Neuflize OBC (ABN AMRO), CEPAC (BPCE)\n💰 **Finance** — MBA Finance & Data, certification AMF en cours\n📊 **Data** — Analyse, BI, Machine Learning, gouvernance\n🌍 **Environnement** — Gaea21 (ONG, Geneve)\n\nSon profil **Finance + Data** est particulierement adapte aux secteurs banque, assurance, fintech et conseil."
+    keys: ['secteur','industrie','domaine','banque','finance','assurance','conseil','fintech','marche','expertise sectorielle'],
+    answer: "Damtoti a une expertise sectorielle qui fait la difference 🏦\n\n**Experiences bancaires :**\n🏛️ Credit Foncier (BPCE) — tresorerie\n💎 Neuflize OBC (ABN AMRO) — banque privee\n🏝️ CEPAC (BPCE) — banque de detail\n\n**Connaissances finance :**\n📈 MBA Finance & Data (ESLSCA)\n📋 Certification AMF en cours\n💰 Econometrie, gestion de portefeuille\n\n**Autres secteurs :**\n🌍 ONG / Environnement (Gaea21, Geneve)\n\nSon profil **Finance + Data** est ideal pour : banque, assurance, fintech, asset management, audit et conseil ! 🎯"
   },
   // ── MÉTHODES / GESTION DE PROJET ───────────
   {
-    keys: ['methode','methodologie','agile','scrum','gestion projet','management','chef projet','organisation','process','workflow'],
-    answer: "Damtoti connait les **methodologies de gestion de projet** :\n\n📋 **Certifie Chef de Projet Data et IA**\n🔄 Methodologies **Agile / Scrum**\n📊 Suivi de KPI et indicateurs de performance\n🗂️ Gestion de projets data de bout en bout (cadrage, collecte, analyse, restitution)\n🤝 Collaboration metiers / IT\n\nIl a l'habitude de travailler en autonomie tout en reportant regulierement a sa hierarchie."
+    keys: ['methode','methodologie','agile','scrum','gestion projet','management','chef projet','organisation','process','workflow','kanban','sprint','backlog'],
+    answer: "Damtoti sait structurer et piloter des projets data ! 📋\n\n🏅 **Certifie Chef de Projet Data et IA**\n\n**Methodologies :**\n🔄 Agile / Scrum (sprints, daily, retrospective)\n📊 Suivi de KPI et indicateurs de performance\n🗂️ Gestion de projets data de A a Z : cadrage → collecte → transformation → analyse → restitution\n🤝 Interface metiers / IT — sait traduire les besoins business en specifications techniques\n\n**Au quotidien :**\n- Autonome dans la gestion de ses taches\n- Reporting regulier a sa hierarchie\n- Habitude de travailler avec des deadlines\n\nIl est structure tout en restant agile ! 🚀"
   },
   // ── DÉFAUT / AMÉLIORATION ──────────────────
   {
-    keys: ['defaut','defauts','faiblesse','faiblesses','ameliorer','amelioration','point faible','limite','limites','manque'],
-    answer: "Damtoti identifie ses **axes d'amelioration** :\n\n📈 **Perfectionnisme** — il aime livrer un travail impeccable, ce qui peut parfois rallonger les delais. Il a appris a prioriser et a livrer en iterations.\n\n🌐 **Anglais** — niveau professionnel solide (B2/C1), mais souhaite atteindre un niveau C2 courant. Il pratique activement.\n\n☁️ **Cloud avance** — bases solides en AWS/Azure, mais souhaite approfondir les architectures cloud data (Databricks, Snowflake). C'est un objectif de formation 2025-2026."
+    keys: ['defaut','defauts','faiblesse','faiblesses','ameliorer','amelioration','point faible','limite','limites','manque','difficulte','defi','challenge','axe amelioration','progres','progresser'],
+    answer: "La transparence, c'est important ! Voici les axes d'amelioration que Damtoti identifie 📝\n\n**📐 Perfectionnisme**\nIl aime livrer un travail impeccable, ce qui pouvait rallonger les delais. Solution ? Il a appris a **prioriser et livrer en iterations** (approche Agile).\n\n**🌐 Anglais**\nNiveau professionnel solide (B2/C1), mais il vise le **C2 courant**. Il pratique activement et travaille en anglais chez ABN AMRO.\n\n**☁️ Cloud avance**\nBases solides (AWS, Azure), mais il souhaite approfondir **Databricks, Snowflake et les architectures cloud data**. C'est son objectif 2025-2026.\n\nCe qui est sur : Damtoti est quelqu'un qui **se remet en question et progresse en permanence** ! 📈"
   },
   // ── RÉFÉRENCES ──────────────────────────────
   {
-    keys: ['reference','references','recommandation','recommandations','ancien manager','superviseur','collegue'],
-    answer: "Damtoti peut fournir des **references professionnelles** sur demande :\n\n- Superviseurs chez **Credit Foncier | BPCE**\n- Manager chez **Neuflize OBC (ABN AMRO)**\n- Encadrant chez **Gaea21** (Geneve)\n\nContactez-le pour obtenir les coordonnees :\n📧 " + dkMail + "\n📞 06 41 25 27 35"
+    keys: ['reference','references','recommandation','recommandations','ancien manager','superviseur','collegue','avis','temoignage','feedback'],
+    answer: "Damtoti peut fournir des **references professionnelles** sur demande 📋\n\n**Contacts disponibles :**\n🏦 Superviseurs chez **Credit Foncier | BPCE**\n💎 Manager chez **Neuflize OBC (ABN AMRO)**\n🌍 Encadrant chez **Gaea21** (Geneve)\n\nSes anciens managers soulignent sa **rigueur, son autonomie et sa rapidite d'apprentissage**.\n\nPour obtenir les coordonnees :\n📧 " + dkMail + "\n📞 06 41 25 27 35"
   },
   // ── OUTILS COLLABORATIFS ───────────────────
   {
-    keys: ['collaboratif','teams','slack','jira','confluence','trello','notion','sharepoint','outlook','office','microsoft 365','google workspace'],
-    answer: "Damtoti utilise les **outils collaboratifs** courants :\n\n💻 **Microsoft 365** — Teams, SharePoint, Outlook, OneDrive\n📊 **Suite Office** — Excel avance, PowerPoint, Word\n🗂️ **Gestion de projet** — methodologies Agile\n🔗 **Partage de donnees** — SharePoint, CRM\n📓 **Developpement** — Git, Jupyter Notebook, VS Code"
+    keys: ['collaboratif','teams','slack','jira','confluence','trello','notion','outlook','office','microsoft 365','google workspace','environnement travail'],
+    answer: "Damtoti est a l'aise avec tous les outils du quotidien ! 💻\n\n**Microsoft 365 :** Teams, SharePoint, Outlook, OneDrive, Power Automate\n**Suite Office :** Excel avance, PowerPoint, Word\n**Gestion de projet :** Methodologies Agile, Kanban\n**Developpement :** Git, Jupyter Notebook, VS Code\n**Partage :** SharePoint, CRM, documentation collaborative\n\nPas de temps d'adaptation sur les outils — il est **directement operationnel** ! ⚡"
   },
   // ── ETL / DATA ENGINEERING ─────────────────
   {
-    keys: ['etl','pipeline','data engineering','ingenierie','flux','integration','transformation','nettoyage','cleaning','data quality','qualite donnees'],
-    answer: "Damtoti a de l'experience en **traitement et qualite des donnees** :\n\n🔄 **ETL :** Power Query M (transformations complexes), Python (pandas)\n🧹 **Nettoyage :** Detection anomalies, standardisation, deduplication\n✅ **Qualite :** Automatisation des controles qualite (Credit Foncier)\n📋 **Gouvernance :** Dictionnaire de donnees DDS (Neuflize OBC)\n🕷️ **Collecte :** Web scraping Python (Gaea21)\n\nIl sait gerer le cycle complet de la donnee : collecte → nettoyage → transformation → analyse → restitution."
+    keys: ['etl','pipeline','data engineering','ingenierie','flux','integration','transformation','nettoyage','cleaning','data quality','qualite donnees','collecte','extraction','scraping'],
+    answer: "Damtoti maitrise le **cycle complet de la donnee** ! 🔄\n\n**🔄 ETL :** Power Query M (transformations complexes), Python (pandas)\n**🧹 Nettoyage :** Detection d'anomalies, standardisation, deduplication\n**✅ Qualite :** Automatisation des controles qualite (Credit Foncier)\n**📋 Gouvernance :** Dictionnaire de donnees DDS (Neuflize OBC)\n**🕷️ Collecte :** Web scraping Python (BeautifulSoup, requests)\n\n**Le cycle complet :**\n📥 Collecte → 🧹 Nettoyage → 🔄 Transformation → 📊 Analyse → 📈 Restitution\n\nIl sait traiter la donnee de bout en bout ! 💪"
   },
   // ── STATISTIQUES / ÉCONOMÉTRIE ─────────────
   {
-    keys: ['statistique','statistiques','econometrie','stats','test','regression','correlation','probabilite','serie temporelle','series temporelles','analyse quantitative'],
-    answer: "Damtoti a une **formation solide en statistiques et econometrie** :\n\n📐 Statistiques descriptives et inferentielles\n📈 Regression lineaire et logistique\n📊 Tests d'hypotheses, intervalles de confiance\n🕐 Series temporelles (SARIMAX, decomposition)\n💰 Econometrie appliquee (formation Univ. Pau)\n🎓 Modules avances en Master Data & IA\n\nIl applique ces connaissances dans ses projets Power BI et Python."
+    keys: ['statistique','statistiques','econometrie','stats','test','correlation','probabilite','serie temporelle','series temporelles','analyse quantitative','chi2','anova','hypothese'],
+    answer: "Damtoti a une **base solide en statistiques** grace a sa formation 📐\n\n📐 Statistiques descriptives et inferentielles\n📈 Regression lineaire et logistique\n📊 Tests d'hypotheses (chi2, ANOVA, t-test)\n📉 Intervalles de confiance, p-values\n🕐 Series temporelles (SARIMAX, decomposition, saisonnalite)\n💰 Econometrie appliquee (Universite de Pau)\n\nIl sait **transformer les chiffres en insights actionnables** pour les decideurs ! 🎯"
   },
   // ── ENTRETIEN / PROCESSUS ──────────────────
   {
-    keys: ['entretien','process','processus','etape','rencontre','rencontrer','rdv','rendez-vous','planifier','agenda','interview','test technique'],
-    answer: "Pour **organiser un entretien** avec Damtoti :\n\n📧 " + dkMail + "\n📞 06 41 25 27 35\n💼 linkedin.com/in/damtoti-kangbie-216531252\n\n✅ Disponible pour :\n- Entretien telephonique / visio\n- Entretien en presentiel (Paris)\n- Test technique (Power BI, SQL, Python)\n- Etude de cas data\n\n📅 Disponible des **septembre 2025** pour un debut de poste."
+    keys: ['entretien','process','processus','etape','rencontre','rencontrer','rdv','rendez-vous','planifier','agenda','interview','test technique','cas pratique','etude de cas'],
+    answer: "Organisons un echange ! 📅\n\n**Comment contacter Damtoti :**\n📧 " + dkMail + "\n📞 06 41 25 27 35\n💼 linkedin.com/in/damtoti-kangbie-216531252\n\n**Il est pret pour :**\n📞 Entretien telephonique\n💻 Entretien visio (Teams, Zoom, Google Meet)\n🤝 Entretien en presentiel a Paris\n💻 Test technique (Power BI, SQL, Python)\n📊 Etude de cas data / business case\n\n📅 Disponible des **septembre 2025** pour un debut de poste\n⚡ Mais pret a echanger **des maintenant** !\n\nIl repond generalement sous **24h**. A bientot ! 😊"
   },
-  // ── MERCI / REMERCIEMENT ───────────────────
+  // ── MANAGEMENT / ENCADREMENT ───────────────
   {
-    keys: ['merci','remercie','super','genial','parfait','top','excellent','bravo','bien'],
-    answer: "Merci beaucoup ! 😊\n\nSi vous avez d'autres questions sur le profil de Damtoti, n'hesitez pas.\n\nPour aller plus loin :\n📧 " + dkMail + "\n📞 06 41 25 27 35\n💼 linkedin.com/in/damtoti-kangbie-216531252"
+    keys: ['manager','management','encadrer','encadrement','equipe','diriger','lead','leadership','responsable','superviseur','junior','senior','niveau'],
+    answer: "En termes de **niveau et management** :\n\n📊 Damtoti a un profil **junior confirme** (2 ans d'experience post-Master)\n👥 Il a travaille en autonomie sur ses projets mais au sein d'equipes structurees\n🤝 Il sait collaborer avec des equipes pluridisciplinaires (metiers, IT, direction)\n📋 Sa certification **Chef de Projet Data & IA** lui donne les bases du pilotage\n\n**Pour la suite :**\nIl est motive pour evoluer vers des responsabilites de **Lead Data Analyst** a moyen terme (2-3 ans). 📈\n\nIl est ambitieux mais realiste — et surtout tres motive ! 💪"
+  },
+  // ── FORMATION CONTINUE / VEILLE ────────────
+  {
+    keys: ['formation continue','apprendre','apprentissage','veille','autoformation','mooc','cours','certification prochaine','evolution','progression','monter en competences','upskill'],
+    answer: "Damtoti est en **apprentissage permanent** ! 📚\n\n**En cours :**\n🎓 MBA Finance & Data Performance (ESLSCA, 2025)\n📋 Certification AMF (en preparation)\n\n**Prochains objectifs :**\n☁️ Approfondir le Cloud Data (Databricks, Snowflake)\n🤖 Deep Learning & NLP\n📊 Certifications supplementaires (Azure, AWS Data)\n\n**Habitudes de veille :**\n📰 Medium, Towards Data Science, LinkedIn\n🎥 YouTube (formations Python, ML)\n💻 Projets personnels reguliers\n\nInvestir dans Damtoti, c'est investir dans quelqu'un qui **evolue en permanence** ! 🚀"
+  },
+  // ── STRESS / PRESSION / DEADLINE ───────────
+  {
+    keys: ['stress','pression','deadline','delai','urgent','urgence','charge','surcharge','volume','periode intense','gerer pression'],
+    answer: "Comment Damtoti gere la pression ? Tres bien, en fait ! 💪\n\n**Son experience :**\nLe secteur bancaire (tresorerie, banque privee) est un environnement a forte pression avec des deadlines strictes. Damtoti y evolue au quotidien.\n\n**Sa methode :**\n📋 **Priorisation** — distinguer urgent/important\n🔄 **Livraison iterative** — avancer par etapes plutot que tout a la fin\n🗣️ **Communication** — alerter en amont si un delai est serre\n🧘 **Sang-froid** — rester calme et methodique\n\nLa pression, ca le motive ! 🚀"
+  },
+  // ── ERREUR / ÉCHEC ─────────────────────────
+  {
+    keys: ['erreur','echec','echoue','rate','difficulte','probleme','obstacle','surmonter','lecon','appris','retenir'],
+    answer: "Damtoti croit que **les erreurs sont les meilleures lecons** ! 📝\n\n**Exemple concret :**\nLors de son premier dashboard Power BI, il a sous-estime le temps de nettoyage des donnees. Resultat : livraison en retard de 2 jours.\n\n**Ce qu'il en a retire :**\n✅ Toujours commencer par **explorer et nettoyer les donnees** avant de designer\n✅ **Estimer le temps de preparation** (souvent 60-70% du projet)\n✅ **Communiquer proactivement** sur l'avancement\n\nDepuis, il n'a plus jamais ete en retard ! Sa devise : **\"Echouer, apprendre, progresser\"** 🚀"
+  },
+  // ── TRAVAIL EN ÉQUIPE / COLLABORATION ──────
+  {
+    keys: ['travail equipe','collaborer','collaboration','collegue','collegues','relation','ensemble','co-equiper','synergies','transversal','pluridisciplinaire'],
+    answer: "Le travail en equipe, c'est son moteur ! 🤝\n\n**Au quotidien, Damtoti collabore avec :**\n🏦 Les equipes **metiers** (finance, commercial, tresorerie)\n💻 Les equipes **IT** (infrastructure, data engineering)\n📊 Les **managers et decideurs** (reporting, presentations)\n\n**Sa force :**\nFaire le **pont entre technique et business** — il sait traduire un besoin metier en solution data, et presenter des resultats techniques a des non-techniciens.\n\n**Son approche :**\n🗣️ Ecoute active\n📋 Clarification des besoins\n🔄 Feedback regulier\n🎯 Livraison orientee valeur\n\nLe football lui a appris que les meilleures victoires sont **collectives** ! ⚽"
   },
   // ── AIDE / SUGGESTIONS ─────────────────────
   {
-    keys: ['aide','help','quoi demander','question','suggestions','sujet','sujets','theme'],
-    answer: "Voici les **sujets** sur lesquels je peux vous renseigner :\n\n👤 Profil et presentation\n💼 Experiences professionnelles\n🎓 Formations et certifications\n🛠️ Competences techniques (Power BI, Python, SQL, Excel...)\n📊 Projets realises\n🤝 Soft skills et qualites\n💰 Pretentions salariales\n📅 Disponibilite et mobilite\n🎯 Type de poste recherche\n⭐ Pourquoi le recruter ?\n📞 Contact et coordonnees\n\nPosez votre question !"
+    keys: ['aide','help','quoi demander','question','suggestions','sujet','sujets','theme','comment fonctionne','que sais tu','capacite','peux tu'],
+    answer: "Je suis la pour vous aider ! 😊 Voici tout ce que je peux vous dire sur Damtoti :\n\n👤 **Profil** — presentation, parcours, CV\n💼 **Experiences** — postes, missions, entreprises\n🎓 **Formations** — diplomes, ecoles, certifications\n🛠️ **Competences** — Power BI, Python, SQL, Excel, ML...\n📊 **Projets** — realisations concretes\n🤝 **Qualites** — soft skills, personnalite\n💰 **Salaire** — pretentions, flexibilite\n📅 **Disponibilite** — date, mobilite, remote\n🎯 **Objectifs** — poste recherche, ambitions\n⭐ **Pourquoi lui ?** — valeur ajoutee, atouts\n📞 **Contact** — email, tel, LinkedIn\n\n**Astuce :** posez votre question naturellement, je comprendrai ! 💡"
+  },
+  // ── PARLEZ-MOI DE VOUS (CLASSIQUE) ─────────
+  {
+    keys: ['parlez moi de vous','parle moi de toi','dites moi tout','racontez moi','dites moi qui','tell me about','pitch','resume en bref','en quelques mots','en resume','synthetise','synthetiser','resumer'],
+    answer: "Avec plaisir, voici Damtoti en quelques mots ! 🎯\n\nDamtoti KANGBIE est un **Data Analyst & Data Scientist** passionne, dote d'un profil rare alliant **finance et data**.\n\n🏦 Actuellement en alternance chez **Credit Foncier (BPCE)**, il concoit des dashboards Power BI pour la tresorerie et automatise les controles qualite.\n\nAvant cela, il a ete **Customer Data Analyst** chez **Neuflize OBC** (banque privee ABN AMRO), ou il a brille par sa capacite a structurer la gouvernance data et creer des reportings multi-sources.\n\nCertifie **Microsoft PL-300**, titulaire d'un **MBA Finance & Data** et d'un **Master IA**, il combine rigueur analytique et vision business.\n\nCe qui le rend unique ? Sa capacite a **transformer des donnees brutes en decisions strategiques** — avec le sourire ! 😊\n\nDisponible des **septembre 2025**, pret a relever de nouveaux defis. 🚀"
+  },
+  // ── PLUS GRANDE RÉUSSITE ───────────────────
+  {
+    keys: ['reussite','fierte','fier','accomplissement','plus grande','meilleur resultat','succes','reussir','exploit','performance','impact','resultat'],
+    answer: "La plus grande fierte de Damtoti ? Plusieurs moments forts ! 🏆\n\n**🥇 Certification PL-300 du premier coup**\nObtenir la certification Microsoft Power BI Data Analyst Associate des la premiere tentative — seuls 60% des candidats y parviennent. Ca valide son expertise de maniere indiscutable.\n\n**📊 Dashboard Campagne Pret Personnel**\nConcevoir un reporting complet pour 5 000 clients, identifier un taux d'acceptation de 9.6% et proposer des axes d'amelioration de ciblage. Un vrai **impact business mesurable**.\n\n**🌍 Stage international a Geneve**\nA 22 ans, partir seul en Suisse chez Gaea21 pour mener un projet data de A a Z (web scraping, reporting Power BI). Ca demande du **courage et de l'autonomie**.\n\n**📈 4 experiences en 2 ans**\nUn rythme impressionnant qui montre sa **soif d'apprendre** et sa capacite a s'adapter rapidement a de nouveaux environnements.\n\nDamtoti ne se repose jamais sur ses acquis — il vise toujours plus haut ! 🚀"
+  },
+  // ── OÙ VOUS VOYEZ-VOUS DANS 5 ANS ─────────
+  {
+    keys: ['5 ans','cinq ans','dans 5','dans cinq','futur','avenir','vision','long terme','evolution','perspective','projection','ou voyez','aspiration','devenir','carriere long'],
+    answer: "Damtoti a une vision claire de son avenir ! 🔮\n\n**Court terme (1-2 ans) :**\n📊 S'etablir comme **Data Analyst Senior** dans le secteur finance/banque\n🏅 Obtenir la certification AMF + une certification Cloud (Azure/AWS Data)\n📈 Approfondir le Machine Learning en contexte business\n\n**Moyen terme (3-5 ans) :**\n🚀 Evoluer vers un poste de **Lead Data Analyst** ou **Data Science Manager**\n🤝 Encadrer une petite equipe data (2-4 personnes)\n🏦 Devenir un expert reconnu en **Data Analytics dans la finance**\n💡 Contribuer a la strategie data de l'entreprise\n\n**Sa philosophie :**\n*\"Progresser chaque jour, apporter de la valeur, et inspirer les autres\"* ✨\n\nDamtoti est ambitieux ET realiste — c'est ce qui fait sa force ! 💪"
+  },
+  // ── MOTIVATION ─────────────────────────────
+  {
+    keys: ['motivation','motive','motiver','passion','passionner','interesse','interesse par','pourquoi data','pourquoi finance','aimer','aime','plait','plaire','inspire','inspiration','moteur','drive'],
+    answer: "Ce qui motive Damtoti au quotidien ? 🔥\n\n**💡 La transformation de la donnee en decisions**\nIl adore ce moment ou un tableau de donnees brutes se transforme en **insight clair et actionnable**. C'est comme resoudre un puzzle geant !\n\n**🏦 L'impact business**\nTravailler dans la finance, c'est savoir que ses analyses influencent des decisions a **plusieurs millions d'euros**. Cette responsabilite le stimule.\n\n**📈 L'apprentissage permanent**\nLa data evolue sans cesse — nouveaux outils, nouvelles methodes. Pour un curieux comme lui, c'est le **terrain de jeu ideal**.\n\n**🤝 Le travail d'equipe**\nFaire le pont entre les equipes metiers et la technique, vulgariser la data pour les decideurs — il adore ce role de **traducteur**.\n\n**🎯 Le challenge**\nChaque nouveau dataset, chaque nouveau probleme est un defi a relever. Et Damtoti **aime les defis** ! 💪"
+  },
+  // ── POURQUOI CE SECTEUR / LA DATA ──────────
+  {
+    keys: ['pourquoi data','pourquoi analytics','pourquoi bi','pourquoi analyse','choisi','choix','vocation','orientation','comment etes','comment es tu','parcours choix'],
+    answer: "Pourquoi la Data ? C'est une vocation ! 🎯\n\nTout a commence pendant sa **Maitrise en Etudes Economiques a Pau**, quand il a decouvert la puissance de l'econometrie et des statistiques appliquees. Transformer des chiffres en **recits convaincants** — c'etait une revelation !\n\nEnsuite, son **Master en Data & IA** chez NEXA lui a ouvert les portes du Machine Learning et de Python. La, il a compris que la data etait **l'avenir de la prise de decision** en entreprise.\n\nPuis la **finance** s'est imposee naturellement : un secteur ou la donnee est **critique, massive et complexe**. Le terrain de jeu parfait pour un Data Analyst ambitieux ! 🏦\n\nAujourd'hui, avec son **MBA Finance & Data** a l'ESLSCA, il a construit le profil ideal au croisement de deux mondes qui se cherchent. Et ca, c'est rare. ⭐"
+  },
+  // ── CONFIANCE / FIABILITÉ ──────────────────
+  {
+    keys: ['confiance','fiable','fiabilite','serieux','professionnel','professionnalisme','responsable','digne','integre','integrite','ethique','honnete','honnetete','discret','discretion','confidentialite'],
+    answer: "La confiance, c'est la valeur numero 1 de Damtoti ! 🤝\n\n**🔐 Confidentialite**\nIl a travaille avec des **donnees financieres sensibles** (tresorerie Credit Foncier, banque privee Neuflize OBC). La discretion est dans son ADN professionnel.\n\n**✅ Fiabilite**\nSes managers le decrivent comme **quelqu'un sur qui on peut compter** : il respecte les delais, communique proactivement et livre un travail soigne.\n\n**📋 Rigueur**\nDans le secteur bancaire, il n'y a pas de place pour l'a-peu-pres. Damtoti a integre cette culture de **l'excellence et du zero defaut**.\n\n**🤝 Ethique professionnelle**\nTransparent, honnete et droit. Il dit ce qu'il fait et fait ce qu'il dit.\n\nVous pouvez lui faire confiance les yeux fermes ! ✨"
+  },
+  // ── IL EST BON ? / NIVEAU / COMPÉTENT ──────
+  {
+    keys: ['bon','competent','niveau','capable','talentueux','talent','valeur','performant','fort','doue','brillant','solide','serieux candidat','vaut','merite'],
+    answer: "Sincerement ? Damtoti est un **excellent profil** et voici pourquoi 🌟\n\n**📊 Les faits parlent d'eux-memes :**\n- Certifie **Microsoft PL-300** (du premier coup !)\n- **4 experiences** en Data en seulement 2 ans\n- **3 diplomes** (MBA + Master + Maitrise)\n- A travaille pour **BPCE** et **ABN AMRO** — des references !\n\n**💡 Ce que ses managers retiennent :**\n- Montee en competences **tres rapide**\n- Autonome en quelques semaines\n- Propose des ameliorations sans qu'on lui demande\n- Sait communiquer ses resultats clairement\n\n**🚀 Ce qui le distingue :**\nSon profil **Finance + Data** est rare sur le marche. La plupart des Data Analysts n'ont pas sa comprehension du business financier, et la plupart des profils finance n'ont pas ses competences techniques.\n\nC'est un profil que les recruteurs s'arrachent — ne tardez pas ! ⏰"
+  },
+  // ── RECOMMANDER / AVIS ─────────────────────
+  {
+    keys: ['recommander','recommande','conseiller','conseille','recruterait','prendrait','embaucherait','avis sur','que pensez','opinion','jugement','evaluation','noter','note'],
+    answer: "Mon avis ? **Foncez, vous ne le regretterez pas !** 🚀\n\n**Voici ce que ses anciens employeurs apprecient chez Damtoti :**\n\n⭐ Une **rapidite d'apprentissage** impressionnante\n⭐ Une capacite a etre **operationnel en quelques jours**\n⭐ Un excellent **relationnel** — agreable, professionnel, positif\n⭐ Des **livrables de qualite** (dashboards, rapports, analyses)\n⭐ Une **proactivite** remarquable — il n'attend pas qu'on lui dise quoi faire\n\n**En plus :**\n- Il est certifie, diplome, experimente et motive\n- Il apporte la **double casquette Finance + Data**\n- Il est disponible des septembre 2025\n\nSi vous cherchez un Data Analyst **fiable, competent et agreable** — Damtoti est votre candidat ideal. 🎯\n\n📧 " + dkMail + " — contactez-le maintenant !"
+  },
+  // ── COMMENT TRAVAILLE-T-IL ─────────────────
+  {
+    keys: ['comment travaille','facon de travailler','methode travail','maniere','approche','style','organisation travail','journee type','quotidien','routine','habitude','fonctionnement'],
+    answer: "Comment Damtoti travaille au quotidien ? Tres efficacement ! ⚡\n\n**📋 Sa methode :**\n1. **Comprendre le besoin** — reunions avec les metiers, ecoute active\n2. **Explorer les donnees** — EDA, qualite, sources disponibles\n3. **Construire la solution** — modelisation, dashboards, analyses\n4. **Livrer et iterer** — presentation, feedback, ameliorations\n\n**⏰ Une journee type :**\n- Matin : extraction et traitement des donnees, mise a jour des dashboards\n- Apres-midi : analyses approfondies, reunions equipe, developpement Power BI/Python\n- Fin de journee : documentation, veille, planification du lendemain\n\n**Ses principes :**\n🎯 **Prioriser** l'impact business\n📊 **Automatiser** tout ce qui peut l'etre\n🗣️ **Communiquer** regulierement avec les parties prenantes\n✅ **Documenter** pour que son travail soit perenne\n\nUn mot : **methodique** ! 📐"
+  },
+  // ── VALEUR AJOUTÉE CONCRÈTE ────────────────
+  {
+    keys: ['apporter','apport','contribuer','contribution','value','valeur','quoi apporter','benefice','gain','retour','roi','investissement','concretement','concret','impact concret'],
+    answer: "Ce que Damtoti peut **concretement apporter** a votre entreprise 💎\n\n**📊 Dashboards Power BI clé en main**\nDes que la premiere semaine, il peut concevoir des tableaux de bord interactifs pour vos equipes. Certifie PL-300, il maitrise l'outil de bout en bout.\n\n**🔄 Automatisation des reportings**\nFini les reportings manuels fastidieux ! Il automatise avec Power Query, Python et VBA. Chez Neuflize OBC, il a fait **gagner des heures** aux equipes commerciales.\n\n**🧹 Qualite des donnees**\nControles automatises, dictionnaires de donnees, gouvernance — il structure votre capital data.\n\n**📈 Analyses a impact business**\nSegmentation client, previsions, detection de tendances — ses analyses **eclairent les decisions strategiques**.\n\n**🤝 Pont entre metiers et IT**\nIl parle les deux langages. Il traduit les besoins business en solutions techniques, et inversement.\n\n**ROI estime :** operationnel en 2 semaines, premiers livrables en 1 mois ! 🚀"
+  },
+  // ── DIFFÉRENCE AVEC AUTRES CANDIDATS ───────
+  {
+    keys: ['difference autres','autre candidat','concurrence','concurrent','comparer','comparaison','versus','par rapport','distingue','demarque','sort du lot','unique candidat','special candidat'],
+    answer: "Ce qui distingue Damtoti des autres candidats ? Beaucoup de choses ! 🌟\n\n**1. Le profil Finance + Data 🏦📊**\nLa plupart des Data Analysts viennent de l'informatique. Damtoti vient de la **finance** (MBA, certification AMF). Il comprend le business, pas juste la technique.\n\n**2. Certifie Microsoft PL-300 🏅**\nPas juste \"connait Power BI\" — il est **officiellement certifie** par Microsoft. C'est un gage de qualite rare chez les juniors.\n\n**3. Experience bancaire de premier plan 🏛️**\nBPCE, ABN AMRO — pas des PME, mais des **groupes bancaires internationaux** avec des exigences elevees.\n\n**4. Operationnel immediatement ⚡**\n4 experiences en 2 ans, il n'a pas besoin de 3 mois pour etre productif.\n\n**5. Polyglotte technique 🛠️**\nPower BI + Python + SQL + Excel + ML — il s'adapte a votre stack, pas l'inverse.\n\n**6. Le facteur humain 😊**\nAgreable, humble, travailleur, positif. Les equipes **adorent travailler avec lui**.\n\nEn resume : technique + business + humain = **profil complet et rare**. ⭐"
+  },
+  // ── IL EST JUNIOR / MANQUE D'EXPÉRIENCE ? ──
+  {
+    keys: ['junior','jeune','peu experience','manque experience','debut carriere','debutant','pas assez','trop jeune','inexperimente','sortie ecole','fraichement'],
+    answer: "Junior sur le papier, mais **loin d'etre un debutant** ! 💪\n\n**Les chiffres :**\n- **4 experiences professionnelles** en 2 ans (stages + alternances)\n- **3 diplomes** (MBA + Master + Maitrise)\n- **3 certifications** dont le PL-300 Microsoft\n- Travail dans **2 grands groupes bancaires** (BPCE, ABN AMRO)\n- Experience **internationale** (Suisse)\n\n**Ce que ca veut dire :**\nDamtoti a plus d'experience operationnelle que beaucoup de candidats avec 3-4 ans d'anciennete, parce qu'il a **enchaine les missions variees** dans des environnements exigeants.\n\n**L'avantage d'un profil junior motive :**\n🔥 Energie et envie d'apprendre\n💡 Pas de mauvaises habitudes — facile a integrer\n📈 ROI rapide — il evolue vite\n💰 Cout attractif par rapport a son niveau de competence\n\nLe recruter maintenant, c'est **investir dans un futur talent senior** ! 🚀"
+  },
+  // ── RAPIDITÉ D'APPRENTISSAGE ───────────────
+  {
+    keys: ['apprendre','apprentissage','rapide','rapidement','monter en competence','formation interne','adapter','adaptation','former','formable','potentiel','capacite apprentissage','curieux apprendre'],
+    answer: "La rapidite d'apprentissage, c'est LE super-pouvoir de Damtoti ! ⚡\n\n**Preuves concretes :**\n🏅 Certification PL-300 obtenue **du premier coup**\n🏦 Operationnel chez Credit Foncier en **2 semaines**\n💎 Autonome chez Neuflize OBC en **3 semaines**\n🌍 A mene un projet data complet seul chez Gaea21 a Geneve\n📈 A passe de 0 a expert Power BI en **moins d'un an**\n\n**Sa methode d'apprentissage :**\n1. Observer et comprendre le contexte\n2. Poser les bonnes questions (pas de fausse pudeur !)\n3. Pratiquer intensivement\n4. Documenter pour ne rien oublier\n5. Partager avec l'equipe\n\nSes managers ont tous souligne cette capacite. Sur une courbe d'apprentissage, Damtoti est **exponentiel** ! 📈🚀"
+  },
+  // ── GESTION DU FEEDBACK / CRITIQUE ─────────
+  {
+    keys: ['feedback','critique','retour','accepte','accepter critique','remise en question','ecouter','ecoute','humble','humilite','recevoir feedback','remarque','correction','corriger'],
+    answer: "Damtoti accueille le feedback avec **ouverture et gratitude** ! 🙏\n\n**Sa philosophie :**\n*\"Chaque feedback est un cadeau — meme quand il pique !\"* 😄\n\n**En pratique :**\n👂 Il **ecoute activement** sans interrompre\n📝 Il **note** les points d'amelioration\n🔄 Il **applique** les corrections rapidement\n🙏 Il **remercie** pour le retour, meme critique\n📈 Il **mesure** sa progression\n\n**Exemple concret :**\nChez Neuflize OBC, son manager lui a suggere d'ameliorer la lisibilite de ses dashboards. En 48h, il a revu toute sa charte graphique et le manager a ete **bluffé** par le resultat.\n\nDamtoti ne prend jamais une critique personnellement — il la transforme en **opportunite de progresser**. 💪"
+  },
+  // ── INNOVATION / CRÉATIVITÉ ────────────────
+  {
+    keys: ['innovation','innover','creatif','creativite','idee','idees','initiative','initiatif','proposer','proposition','amelioration proposee','suggestion','proactif','proactivite','force proposition'],
+    answer: "Damtoti n'est pas du genre a attendre qu'on lui dise quoi faire ! 💡\n\n**Exemples d'initiatives :**\n\n🔄 **Chez Credit Foncier :** il a propose l'**automatisation** de controles qualite qui etaient faits manuellement — gain de temps considerable pour l'equipe.\n\n📊 **Chez Neuflize OBC :** il a cree un **dictionnaire de donnees** (DDS) de sa propre initiative pour structurer la gouvernance data.\n\n📈 **En projet :** il cherche toujours a aller **au-dela du brief** — ajouter un KPI pertinent, proposer une visualisation plus claire, suggerer une source de donnees supplementaire.\n\n**Son etat d'esprit :**\n*\"Ne pas juste repondre a la question, mais apporter plus de valeur que ce qu'on attend.\"*\n\nC'est un **force de proposition** naturelle — vos equipes vont adorer ! 🚀"
+  },
+  // ── QUESTION PIÈGE / SITUATION DIFFICILE ───
+  {
+    keys: ['situation difficile','conflit','desaccord','probleme equipe','tension','crise','gerer conflit','difficulte relationnelle','client difficile','manager difficile','pression equipe','challenge relationnel'],
+    answer: "Comment Damtoti gere les situations delicates ? Avec calme et methode ! 🧘\n\n**Sa philosophie :** *\"Toujours chercher la solution, jamais le coupable.\"*\n\n**Exemple concret :**\nChez Neuflize OBC, il y a eu un desaccord entre l'equipe commerciale et l'IT sur la fiabilite des donnees CRM. Damtoti a pris l'initiative de :\n1. 📋 **Documenter** les ecarts constates (faits, pas opinions)\n2. 🤝 **Reunir** les deux equipes autour d'un constat partage\n3. 💡 **Proposer** un dictionnaire de donnees commun (DDS)\n4. ✅ **Livrer** la solution — adoptee par tous !\n\n**Resultat :** le probleme s'est transforme en **amelioration durable** de la qualite des donnees.\n\nDamtoti transforme les tensions en **opportunites de collaboration**. 🌟"
+  },
+  // ── TRAVAIL SOUS PRESSION (enrichi) ────────
+  {
+    keys: ['stress','pression','deadline','delai','urgent','urgence','charge','surcharge','volume','periode intense','gerer pression','travail intense'],
+    answer: "La pression ? Damtoti la transforme en energie ! 💪🔥\n\n**Son quotidien :**\nLe secteur bancaire (tresorerie, banque privee) = **pression constante**, deadlines strictes, zero erreur toleree. C'est son environnement naturel.\n\n**Sa methode anti-stress :**\n📋 **Prioriser** avec la matrice urgent/important\n🔄 **Decouper** les gros projets en petites taches\n🗣️ **Alerter** en amont si un delai est serre (pas de mauvaise surprise !)\n⚽ **Decompresser** — le football le soir vide la tete\n🧘 **Rester calme** — la panique n'a jamais resolu un probleme\n\n**Temoignage de ses managers :**\n*\"Meme sous pression, Damtoti reste lucide, methodique et positif. C'est rare et precieux.\"*\n\nPlus la barre est haute, plus il est performant ! 🚀"
   }
 ];
 
 function smartReply(q) {
   var norm = function(s) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); };
   var nq = norm(q);
-  // Score-based matching: count how many keys match
+  var words = nq.split(/\s+/);
+
+  // Score-based matching with bonus for multi-word keys
   var bestScore = 0;
   var bestAnswer = null;
-  for (var i=0; i<KB.length; i++) {
+  for (var i = 0; i < KB.length; i++) {
     var e = KB[i];
     var score = 0;
-    for (var j=0; j<e.keys.length; j++) {
-      if (nq.indexOf(norm(e.keys[j])) !== -1) score++;
+    for (var j = 0; j < e.keys.length; j++) {
+      var k = norm(e.keys[j]);
+      if (nq.indexOf(k) !== -1) {
+        var keyWords = k.split(/\s+/).length;
+        score += keyWords;
+      }
     }
     if (score > bestScore) {
       bestScore = score;
@@ -1647,7 +1775,35 @@ function smartReply(q) {
     }
   }
   if (bestAnswer) return bestAnswer;
-  return "Je n'ai pas trouve de reponse precise a votre question. 🤔\n\nVoici ce que je peux vous dire sur Damtoti :\n👤 Profil · 💼 Experiences · 🎓 Formations · 🛠️ Competences · 📊 Projets · 📅 Disponibilite · 📞 Contact\n\nOu contactez-le directement :\n📧 " + dkMail + " | 📞 06 41 25 27 35";
+
+  // Smart fallback: try partial word matching
+  var partialBest = 0;
+  var partialAnswer = null;
+  for (var i = 0; i < KB.length; i++) {
+    var e = KB[i];
+    var pscore = 0;
+    for (var j = 0; j < e.keys.length; j++) {
+      var k = norm(e.keys[j]);
+      for (var w = 0; w < words.length; w++) {
+        if (words[w].length > 3 && k.indexOf(words[w]) !== -1) pscore++;
+        if (words[w].length > 3 && words[w].indexOf(k) !== -1) pscore++;
+      }
+    }
+    if (pscore > partialBest) {
+      partialBest = pscore;
+      partialAnswer = e.answer;
+    }
+  }
+  if (partialBest >= 2 && partialAnswer) return partialAnswer;
+
+  // Friendly random fallback
+  var fallbacks = [
+    "Hmm, question interessante ! 🤔 Je ne suis pas sur d'avoir la reponse exacte, mais je suis incollable sur Damtoti !\n\nEssayez par exemple :\n💬 \"Parlez-moi de lui\"\n💬 \"Ses competences ?\"\n💬 \"Pourquoi le recruter ?\"\n💬 \"Quel salaire ?\"\n\nOu posez-lui la question directement : " + dkMail + " 😊",
+    "Bonne question ! 🤔 Ca sort un peu de mon expertise, mais Damtoti se fera un plaisir d'y repondre en personne :\n📧 " + dkMail + "\n📞 06 41 25 27 35\n\nEn attendant, je suis imbattable sur son profil, ses competences, ses experiences et sa disponibilite ! 😊",
+    "Je ne suis pas certain de bien comprendre... 😅 Mais ne vous inquietez pas, je suis tres bavard sur Damtoti !\n\nQuelques idees :\n⭐ Ses forces et atouts\n🛠️ Ses competences techniques\n💼 Ses experiences\n📅 Sa disponibilite\n\nPosez votre question autrement, je ferai de mon mieux ! 💪",
+    "Oups, je seche sur celle-la ! 😄 Mais je peux vous assurer que Damtoti, lui, aurait la reponse !\n\nContactez-le :\n📧 " + dkMail + "\n📞 06 41 25 27 35\n\nSinon, demandez-moi n'importe quoi sur son parcours — la, je suis imbattable ! 🏆"
+  ];
+  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
 }
 
 function fmt(t) {
