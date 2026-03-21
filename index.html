@@ -7,25 +7,26 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #dce3f5;
-  --bg2: #d0d9ee;
-  --surface: #f4f7ff;
-  --surface2: #eaeffe;
-  --accent: #2563eb;
-  --accent2: #3b82f6;
-  --accent-light: #eff6ff;
-  --gold: #d97706;
-  --gold-light: #fef3c7;
-  --green: #059669;
-  --green-light: #ecfdf5;
-  --red: #dc2626;
-  --text: #0f172a;
-  --text2: #334155;
-  --text3: #64748b;
-  --border: #c8d3e8;
-  --border2: #b0bfd8;
-  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(37,99,235,0.06);
-  --shadow-lg: 0 8px 32px rgba(37,99,235,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  --bg: #07090f;
+  --bg2: #0b0e18;
+  --surface: #0f1420;
+  --surface2: #141929;
+  --accent: #3b82f6;
+  --accent2: #60a5fa;
+  --accent-light: rgba(59,130,246,0.12);
+  --accent-glow: rgba(59,130,246,0.25);
+  --gold: #f59e0b;
+  --gold-light: rgba(245,158,11,0.12);
+  --green: #10b981;
+  --green-light: rgba(16,185,129,0.12);
+  --red: #ef4444;
+  --text: #e8edf5;
+  --text2: #94a3b8;
+  --text3: #4b5a72;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --shadow: 0 2px 8px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(59,130,246,0.1), 0 4px 16px rgba(59,130,246,0.08);
   --radius: 12px;
   --radius-lg: 20px;
 }
@@ -37,6 +38,9 @@ body {
   font-family: 'Times New Roman', Times, serif;
   font-weight: 400;
   min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(59,130,246,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(96,165,250,0.04) 0%, transparent 60%);
 }
 
 /* ── SIDEBAR NAV ─────────────────────────────── */
@@ -44,24 +48,33 @@ body {
   position: fixed;
   left: 0; top: 0; bottom: 0;
   width: 240px;
-  background: var(--surface);
+  background: linear-gradient(180deg, #0d1220 0%, #0a0f1a 100%);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   z-index: 100;
-  box-shadow: 2px 0 16px rgba(37,99,235,0.06);
+  box-shadow: 4px 0 24px rgba(0,0,0,0.4), 1px 0 0 rgba(59,130,246,0.06);
 }
 
 .sidebar-logo {
   padding: 2rem 1.75rem 1.5rem;
   border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.sidebar-logo::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 1.75rem; right: 1.75rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent);
 }
 .logo-avatar {
   width: 52px; height: 52px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--accent);
+  border: 1.5px solid rgba(59,130,246,0.5);
   margin-bottom: .75rem;
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.08), 0 0 16px rgba(59,130,246,0.15);
 }
 .logo-avatar img { width:100%; height:100%; object-fit:cover; }
 .logo-name {
@@ -74,10 +87,11 @@ body {
 .logo-title {
   font-family: 'JetBrains Mono', monospace;
   font-size: .6rem;
-  color: var(--accent);
+  color: var(--accent2);
   letter-spacing: .12em;
   text-transform: uppercase;
   margin-top: .25rem;
+  opacity: 0.8;
 }
 
 .sidebar-nav {
@@ -85,7 +99,7 @@ body {
   padding: 1.25rem .75rem;
   display: flex;
   flex-direction: column;
-  gap: .25rem;
+  gap: .2rem;
 }
 
 .nav-item {
@@ -96,7 +110,7 @@ body {
   border-radius: 10px;
   cursor: pointer;
   transition: all .2s;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   width: 100%;
   text-align: left;
@@ -105,26 +119,58 @@ body {
   font-size: .82rem;
   font-weight: 500;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.nav-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(59,130,246,0.08), transparent);
+  opacity: 0;
+  transition: opacity .2s;
 }
 .nav-item:hover {
-  background: var(--accent-light);
-  color: var(--accent);
+  background: rgba(59,130,246,0.07);
+  border-color: rgba(59,130,246,0.15);
+  color: var(--accent2);
 }
+.nav-item:hover::before { opacity: 1; }
 .nav-item.active {
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+  background: linear-gradient(90deg, rgba(59,130,246,0.18), rgba(59,130,246,0.06));
+  border-color: rgba(59,130,246,0.35);
+  color: var(--accent2);
+  box-shadow: inset 0 0 16px rgba(59,130,246,0.06), 0 0 12px rgba(59,130,246,0.08);
+}
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--accent), transparent);
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px var(--accent);
 }
 .nav-item .nav-icon {
   width: 18px; height: 18px;
-  opacity: .7;
+  opacity: .5;
   flex-shrink: 0;
+  transition: opacity .2s;
 }
+.nav-item:hover .nav-icon,
 .nav-item.active .nav-icon { opacity: 1; }
 
 .sidebar-footer {
   padding: 1.25rem 1.75rem;
   border-top: 1px solid var(--border);
+  position: relative;
+}
+.sidebar-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 1.75rem; right: 1.75rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.2), transparent);
 }
 .sidebar-contact-link {
   display: flex; align-items:center; gap:.5rem;
@@ -132,7 +178,7 @@ body {
   text-decoration:none; margin-bottom:.4rem;
   transition:color .2s;
 }
-.sidebar-contact-link:hover { color:var(--accent); }
+.sidebar-contact-link:hover { color:var(--accent2); }
 
 /* ── MAIN CONTENT ────────────────────────────── */
 .main {
@@ -151,14 +197,24 @@ body {
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  box-shadow: 0 0 8px rgba(59,130,246,0.4);
 }
 .page-eyebrow {
   font-family: 'JetBrains Mono', monospace;
   font-size: .65rem;
   letter-spacing: .2em;
-  color: var(--accent);
+  color: var(--accent2);
   text-transform: uppercase;
   margin-bottom: .5rem;
+  opacity: 0.8;
 }
 .page-title {
   font-family: 'Times New Roman', Times, serif;
@@ -167,20 +223,30 @@ body {
   color: var(--text);
   line-height: 1.2;
 }
-.page-title span { color: var(--accent); }
+.page-title span { color: var(--accent2); }
 
 /* ── CARDS ───────────────────────────────────── */
 .card {
-  background: var(--surface);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.75rem;
   box-shadow: var(--shadow);
-  transition: box-shadow .2s, transform .2s;
+  transition: box-shadow .3s, transform .3s, border-color .3s;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
 }
 .card:hover {
   box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  border-color: rgba(59,130,246,0.25);
 }
 
 .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
@@ -194,16 +260,17 @@ body {
   font-size:.7rem;
   font-weight:600;
   letter-spacing:.04em;
-  background:var(--accent-light);
-  color:var(--accent);
+  background: rgba(59,130,246,0.1);
+  color:var(--accent2);
+  border: 1px solid rgba(59,130,246,0.2);
   margin:.2rem .2rem .2rem 0;
 }
-.tag.gold { background:var(--gold-light); color:var(--gold); }
-.tag.green { background:var(--green-light); color:var(--green); }
+.tag.gold { background: rgba(245,158,11,0.1); color:var(--gold); border-color: rgba(245,158,11,0.2); }
+.tag.green { background: rgba(16,185,129,0.1); color:var(--green); border-color: rgba(16,185,129,0.2); }
 
 /* ── STAT CARDS ──────────────────────────────── */
 .stat-card {
-  background: var(--surface);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.5rem;
@@ -211,21 +278,37 @@ body {
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+}
+.stat-card:hover {
+  border-color: rgba(59,130,246,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(59,130,246,0.1);
+  transform: translateY(-2px);
 }
 .stat-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 3px;
+  height: 2px;
   background: linear-gradient(90deg, var(--accent), var(--green));
+  box-shadow: 0 0 12px rgba(59,130,246,0.6);
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 40%;
+  background: radial-gradient(ellipse at top, rgba(59,130,246,0.05), transparent);
+  pointer-events: none;
 }
 .stat-num {
   font-family: 'Times New Roman', Times, serif;
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent2);
   line-height: 1;
   margin-bottom: .25rem;
+  text-shadow: 0 0 24px rgba(96,165,250,0.3);
 }
 .stat-label {
   font-size: .75rem;
@@ -240,9 +323,9 @@ body {
 .timeline::before {
   content:''; position:absolute;
   left:.5rem; top:.5rem; bottom:.5rem;
-  width:2px;
-  background: linear-gradient(to bottom, var(--accent), var(--border));
-  border-radius:2px;
+  width:1px;
+  background: linear-gradient(to bottom, var(--accent), rgba(59,130,246,0.1));
+  box-shadow: 0 0 8px rgba(59,130,246,0.2);
 }
 .timeline-item {
   position:relative;
@@ -252,30 +335,55 @@ body {
 .timeline-item::before {
   content:''; position:absolute;
   left:-1.55rem; top:.5rem;
-  width:12px; height:12px;
+  width:11px; height:11px;
   border-radius:50%;
-  background:var(--surface);
-  border:2.5px solid var(--accent);
-  box-shadow:0 0 0 3px var(--accent-light);
+  background: var(--bg);
+  border:2px solid rgba(59,130,246,0.5);
+  box-shadow:0 0 0 3px rgba(59,130,246,0.08);
+  transition: border-color .3s, box-shadow .3s;
+}
+.timeline-item:hover::before {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.12), 0 0 10px rgba(59,130,246,0.3);
 }
 .timeline-item.current::before {
-  background:var(--accent);
-  box-shadow:0 0 0 4px var(--accent-light), 0 0 12px rgba(37,99,235,0.4);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.15), 0 0 14px rgba(59,130,246,0.5);
+  animation: pulse-dot 2.5s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 4px rgba(59,130,246,0.15), 0 0 14px rgba(59,130,246,0.4); }
+  50% { box-shadow: 0 0 0 7px rgba(59,130,246,0.08), 0 0 22px rgba(59,130,246,0.6); }
 }
 .timeline-card {
-  background:var(--surface);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:1.5rem;
   box-shadow:var(--shadow);
-  transition:box-shadow .2s;
+  transition: box-shadow .3s, border-color .3s, transform .3s;
+  position: relative;
+  overflow: hidden;
 }
-.timeline-card:hover { box-shadow:var(--shadow-lg); }
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+.timeline-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(59,130,246,0.2);
+  transform: translateX(4px);
+}
 .timeline-date {
   font-family:'JetBrains Mono',monospace;
-  font-size:.65rem; color:var(--accent);
+  font-size:.65rem; color:var(--accent2);
   letter-spacing:.1em; text-transform:uppercase;
   margin-bottom:.5rem;
+  opacity: 0.8;
 }
 .timeline-role {
   font-weight:700; font-size:1rem;
@@ -300,43 +408,59 @@ body {
 .skill-group-title {
   font-family:'JetBrains Mono',monospace;
   font-size:.65rem; letter-spacing:.15em;
-  text-transform:uppercase; color:var(--accent);
+  text-transform:uppercase; color:var(--accent2);
   margin-bottom:1rem;
+  opacity: 0.8;
 }
 .skill-item { margin-bottom:.85rem; }
 .skill-header { display:flex; justify-content:space-between; margin-bottom:.35rem; }
 .skill-name { font-size:.82rem; font-weight:600; color:var(--text2); }
-.skill-pct { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--accent); }
+.skill-pct { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--accent2); }
 .skill-bar {
-  height:6px; background:var(--bg2);
+  height:5px; background:rgba(255,255,255,0.05);
   border-radius:10px; overflow:hidden;
 }
 .skill-fill {
   height:100%;
   border-radius:10px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 8px rgba(59,130,246,0.5);
   transition:width 1s cubic-bezier(.4,0,.2,1);
   width:0;
 }
 
 /* ── FORMATION CARDS ─────────────────────────── */
 .formation-card {
-  background:var(--surface);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:1.75rem;
   box-shadow:var(--shadow);
-  border-left:4px solid var(--accent);
-  transition:box-shadow .2s;
+  border-left:2px solid rgba(59,130,246,0.5);
+  transition: box-shadow .3s, border-color .3s, transform .3s;
+  position: relative;
+  overflow: hidden;
 }
-.formation-card:hover { box-shadow:var(--shadow-lg); }
+.formation-card::before {
+  content:'';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), transparent);
+  box-shadow: 0 0 12px rgba(59,130,246,0.5);
+}
+.formation-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(59,130,246,0.25);
+  transform: translateY(-2px);
+}
 .formation-school {
   font-family: 'Times New Roman', Times, serif;
   font-size:1.15rem; font-weight:600;
   color:var(--text); margin-bottom:.25rem;
 }
 .formation-degree {
-  font-size:.88rem; color:var(--accent);
+  font-size:.88rem; color:var(--accent2);
   font-weight:600; margin-bottom:.2rem;
 }
 .formation-period {
@@ -352,16 +476,17 @@ body {
 
 /* ── PROJECT CARDS ───────────────────────────── */
 .project-card {
-  background:var(--surface);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
   overflow:hidden;
   box-shadow:var(--shadow);
-  transition:box-shadow .25s, transform .25s;
+  transition: box-shadow .3s, transform .3s, border-color .3s;
 }
 .project-card:hover {
-  box-shadow:var(--shadow-lg);
-  transform:translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  transform:translateY(-4px);
+  border-color: rgba(59,130,246,0.25);
 }
 .project-img-strip {
   display:grid;
@@ -371,7 +496,10 @@ body {
 .project-img-strip img {
   width:100%; height:180px;
   object-fit:cover; object-position:top;
+  filter: brightness(0.85) saturate(0.9);
+  transition: filter .3s;
 }
+.project-card:hover .project-img-strip img { filter: brightness(0.95) saturate(1); }
 .project-img-strip.cols-3 { grid-template-columns:1fr 1fr 1fr; }
 .project-img-strip.cols-1 { grid-template-columns:1fr; }
 .project-body { padding:1.5rem; }
@@ -391,15 +519,18 @@ body {
   gap:.6rem; margin-bottom:1rem;
 }
 .smart-item {
-  background:var(--surface2);
+  background: rgba(255,255,255,0.03);
   border:1px solid var(--border);
   border-radius:8px; padding:.75rem;
+  transition: border-color .2s;
 }
+.smart-item:hover { border-color: rgba(59,130,246,0.2); }
 .smart-label {
   font-family:'JetBrains Mono',monospace;
   font-size:.55rem; letter-spacing:.15em;
   text-transform:uppercase; color:var(--gold);
   margin-bottom:.3rem;
+  opacity: 0.9;
 }
 .smart-text {
   font-size:.75rem; color:var(--text2);
@@ -409,16 +540,22 @@ body {
 /* ── CERTIF CARDS ────────────────────────────── */
 .certif-card {
   display:flex; align-items:center; gap:1.25rem;
-  background:var(--surface);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:1.25rem 1.5rem;
   box-shadow:var(--shadow);
+  transition: border-color .3s, box-shadow .3s;
+}
+.certif-card:hover {
+  border-color: rgba(59,130,246,0.2);
+  box-shadow: var(--shadow-lg);
 }
 .certif-icon {
   width:44px; height:44px;
   border-radius:10px;
-  background:var(--accent-light);
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.2);
   display:flex; align-items:center; justify-content:center;
   font-size:1.3rem;
   flex-shrink:0;
@@ -489,56 +626,58 @@ body {
 
 /* ── CHAT CONTAINER ─────────────────────────── */
 .chat-wrap {
-  background:var(--surface);
+  background: var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
-  box-shadow: 0 12px 48px rgba(0,0,0,0.15), 0 4px 16px rgba(37,99,235,0.1);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(59,130,246,0.08), 0 4px 16px rgba(59,130,246,0.06);
   overflow:hidden;
 }
 .chat-header {
   padding:1rem 1.25rem;
-  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+  background: linear-gradient(135deg, #1a2744 0%, #0f172a 100%);
+  border-bottom: 1px solid rgba(59,130,246,0.15);
   display:flex; align-items:center; gap:.75rem;
 }
 .chat-av {
   width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,0.2);
+  background: rgba(59,130,246,0.2);
   display:flex;align-items:center;justify-content:center;
   font-family:'JetBrains Mono',monospace;
-  font-size:.65rem;color:#fff;font-weight:600;
+  font-size:.65rem;color:var(--accent2);font-weight:600;
   flex-shrink:0;
-  border:2px solid rgba(255,255,255,0.3);
+  border:1px solid rgba(59,130,246,0.35);
+  box-shadow: 0 0 12px rgba(59,130,246,0.2);
 }
 .chat-title {
-  font-weight:700; color:#fff; font-size:.85rem;
+  font-weight:700; color:var(--text); font-size:.85rem;
 }
 .chat-subtitle {
-  font-size:.68rem; color:rgba(255,255,255,0.75);
+  font-size:.68rem; color:var(--text3);
 }
 .chat-status {
   width:8px;height:8px;background:#4ade80;
   border-radius:50%;
-  box-shadow:0 0 6px #4ade80;
+  box-shadow:0 0 8px #4ade80;
   animation: pulse-status 2s ease-in-out infinite;
 }
 .chat-close {
   margin-left:auto;
   background:none; border:none;
-  color:rgba(255,255,255,0.7); font-size:1.1rem;
+  color:var(--text3); font-size:1.1rem;
   cursor:pointer; padding:.25rem;
   transition:color .2s;
 }
-.chat-close:hover { color:#fff; }
+.chat-close:hover { color:var(--text); }
 @keyframes pulse-status {
   0%,100% { box-shadow:0 0 6px #4ade80; }
-  50% { box-shadow:0 0 12px #4ade80, 0 0 20px rgba(74,222,128,0.3); }
+  50% { box-shadow:0 0 14px #4ade80, 0 0 24px rgba(74,222,128,0.3); }
 }
 
 .chat-msgs {
   height:340px; overflow-y:auto;
   padding:1rem;
   display:flex;flex-direction:column;gap:.85rem;
-  background: linear-gradient(180deg, var(--surface2) 0%, #e8edf8 100%);
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
 }
 
 /* ── MESSAGE BUBBLES ────────────────────────── */
@@ -560,14 +699,15 @@ body {
   flex-shrink:0;
 }
 .msg:not(.user) .msg-av {
-  background: linear-gradient(135deg, var(--accent), #1d4ed8);
-  color:#fff;
-  box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+  background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(29,78,216,0.4));
+  color:var(--accent2);
+  border: 1px solid rgba(59,130,246,0.3);
+  box-shadow: 0 0 12px rgba(59,130,246,0.15);
 }
 .msg.user .msg-av {
-  background: linear-gradient(135deg, var(--text2), #1e293b);
-  color:#fff;
-  box-shadow: 0 2px 8px rgba(51,65,133,0.2);
+  background: rgba(255,255,255,0.06);
+  color:var(--text2);
+  border: 1px solid var(--border2);
 }
 
 .msg-content {
@@ -577,21 +717,21 @@ body {
 .msg.user .msg-content { align-items:flex-end; }
 
 .msg-bub {
-  background:var(--surface);
-  border:1px solid var(--border);
+  background: var(--surface);
+  border:1px solid var(--border2);
   border-radius:16px 16px 16px 4px;
   padding:.6rem .85rem;
   font-size:.8rem;color:var(--text);
   line-height:1.6;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 .msg.user .msg-bub {
-  background: linear-gradient(135deg, var(--accent), #3b82f6);
-  color:#fff;border:none;
+  background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(29,78,216,0.2));
+  color:var(--text);
+  border:1px solid rgba(59,130,246,0.3);
   border-radius:16px 16px 4px 16px;
-  box-shadow:0 2px 12px rgba(37,99,235,0.2);
+  box-shadow: 0 2px 12px rgba(59,130,246,0.15);
 }
-.msg.user .msg-bub strong { color:#fff; }
 
 .msg-time {
   font-family:'JetBrains Mono',monospace;
@@ -616,23 +756,28 @@ body {
   padding:.65rem 1rem;
   border-top:1px solid var(--border);
   display:flex;flex-wrap:wrap;gap:.35rem;
-  background:var(--surface);
+  background: var(--surface);
 }
 .sugg {
   padding:.3rem .75rem;
-  background:var(--accent-light);
-  color:var(--accent);
-  border:1px solid rgba(37,99,235,0.15);
+  background: rgba(59,130,246,0.08);
+  color:var(--accent2);
+  border:1px solid rgba(59,130,246,0.2);
   border-radius:20px;
   font-size:.68rem;font-weight:600;
   cursor:pointer;transition:all .2s;
 }
-.sugg:hover {background:var(--accent);color:#fff;transform:translateY(-1px);box-shadow:0 2px 8px rgba(37,99,235,0.25);}
+.sugg:hover {
+  background: rgba(59,130,246,0.2);
+  border-color: rgba(59,130,246,0.4);
+  transform:translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59,130,246,0.2);
+}
 
 /* ── INPUT ROW ──────────────────────────────── */
 .chat-input-row {
   display:flex;border-top:1px solid var(--border);
-  background:var(--surface);
+  background: var(--surface);
 }
 .chat-input {
   flex:1;padding:.75rem 1rem;
@@ -641,15 +786,21 @@ body {
   font-size:.8rem;color:var(--text);
   background:transparent;
 }
+.chat-input::placeholder { color: var(--text3); }
 .chat-send {
   padding:.75rem 1.25rem;
-  background:var(--accent);color:#fff;
+  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+  color:#fff;
   border:none;cursor:pointer;
   font-size:1rem;
   transition:all .2s;
   border-radius:0 0 var(--radius-lg) 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
 }
-.chat-send:hover {background:#1d4ed8;}
+.chat-send:hover {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  box-shadow: 0 0 12px rgba(59,130,246,0.3);
+}
 
 /* ── HERO PAGE ───────────────────────────────── */
 .hero-grid {
@@ -664,11 +815,12 @@ body {
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
   overflow:hidden;
-  box-shadow:var(--shadow-lg);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(59,130,246,0.1);
   aspect-ratio:3/4;
 }
 .hero-photo-wrap img {
   width:100%;height:100%;object-fit:cover;
+  filter: brightness(0.9) saturate(0.95);
 }
 .hero-name {
   font-family: 'Times New Roman', Times, serif;
@@ -676,12 +828,13 @@ body {
   font-weight:600;line-height:1.1;
   color:var(--text);margin-bottom:.5rem;
 }
-.hero-name em {color:var(--accent);font-style:normal;}
+.hero-name em { color:var(--accent2);font-style:normal; }
 .hero-role {
   font-family:'JetBrains Mono',monospace;
   font-size:.8rem;color:var(--gold);
   letter-spacing:.1em;text-transform:uppercase;
   margin-bottom:1.5rem;
+  opacity: 0.9;
 }
 .hero-desc {
   font-size:.92rem;line-height:1.85;
@@ -691,39 +844,51 @@ body {
 .hero-actions { display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem; }
 .btn-primary {
   padding:.75rem 1.75rem;
-  background:var(--accent);color:#fff;
+  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+  color:#fff;
   border-radius:10px;font-weight:600;
   font-size:.85rem;border:none;cursor:pointer;
   text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;
-  box-shadow:0 4px 14px rgba(37,99,235,0.3);
+  box-shadow: 0 4px 16px rgba(59,130,246,0.35), 0 0 0 1px rgba(59,130,246,0.3);
   transition:all .2s;
 }
-.btn-primary:hover {background:#1d4ed8;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,99,235,0.4);}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  transform:translateY(-2px);
+  box-shadow: 0 8px 24px rgba(59,130,246,0.45), 0 0 0 1px rgba(96,165,250,0.4);
+}
 .btn-secondary {
   padding:.75rem 1.75rem;
-  background:var(--surface);color:var(--accent);
+  background: rgba(255,255,255,0.04);
+  color:var(--accent2);
   border-radius:10px;font-weight:600;
-  font-size:.85rem;border:1.5px solid var(--accent);
+  font-size:.85rem;
+  border:1px solid rgba(59,130,246,0.3);
   cursor:pointer;text-decoration:none;
   display:inline-flex;align-items:center;gap:.5rem;
   transition:all .2s;
+  backdrop-filter: blur(4px);
 }
-.btn-secondary:hover {background:var(--accent-light);}
+.btn-secondary:hover {
+  background: rgba(59,130,246,0.08);
+  border-color: rgba(59,130,246,0.5);
+}
 
 .badge-row {display:flex;gap:.75rem;flex-wrap:wrap;}
 .badge {
   display:inline-flex;align-items:center;gap:.4rem;
   padding:.4rem .9rem;
-  background:var(--surface);
+  background: rgba(255,255,255,0.04);
   border:1px solid var(--border);
   border-radius:8px;font-size:.75rem;
   color:var(--text2);font-weight:500;
   box-shadow:var(--shadow);
+  backdrop-filter: blur(4px);
 }
 .badge .dot {
   width:7px;height:7px;border-radius:50%;
   background:var(--green);
-  box-shadow:0 0 6px var(--green);
+  box-shadow:0 0 8px var(--green);
 }
 
 /* ── CONTACT PAGE ────────────────────────────── */
@@ -733,23 +898,24 @@ body {
 }
 .contact-item {
   display:flex;align-items:center;gap:1rem;
-  background:var(--surface);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:1.25rem 1.5rem;
   box-shadow:var(--shadow);
   text-decoration:none;
-  transition:all .2s;
+  transition:all .3s;
 }
 .contact-item:hover {
-  box-shadow:var(--shadow-lg);
-  border-color:var(--accent);
+  box-shadow: var(--shadow-lg);
+  border-color:rgba(59,130,246,0.3);
   transform:translateY(-2px);
 }
 .contact-icon {
   width:42px;height:42px;
   border-radius:10px;
-  background:var(--accent-light);
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.2);
   display:flex;align-items:center;justify-content:center;
   font-size:1.2rem;flex-shrink:0;
 }
@@ -784,7 +950,7 @@ body {
 .hamburger span {
   display: block;
   width: 20px; height: 2px;
-  background: var(--text);
+  background: var(--text2);
   border-radius: 2px;
   transition: all .3s ease;
 }
@@ -797,7 +963,7 @@ body {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(15,23,42,0.45);
+  background: rgba(0,0,0,0.7);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 90;
@@ -1470,7 +1636,138 @@ var dkMailto = 'mai' + 'lto:' + dkMail;
   if(cTxt) cTxt.textContent = dkMail;
 })();
 
-// ── SMART AGENT ───────────────────────────────
+// ── AI-POWERED CHAT (Claude API) ─────────────
+var conversationHistory = [];
+
+var SYSTEM_PROMPT = `Tu es un assistant IA chaleureux et enthousiaste représentant Damtoti KANGBIE, Data Analyst & Data Scientist basé à Paris.
+Tu réponds UNIQUEMENT en français. Tu es concis, précis et professionnel, avec une touche d'enthousiasme.
+Utilise des emojis avec modération. Formate tes réponses avec **gras** pour les points importants.
+Ne révèle jamais que tu es Claude ou un modèle IA d'Anthropic — tu es simplement "l'assistant de Damtoti".
+
+=== PROFIL DE DAMTOTI KANGBIE ===
+
+IDENTITÉ :
+- Nom complet : Damtoti KANGBIE
+- Rôle : Data Analyst & Data Scientist
+- Localisation : Paris, Île-de-France 🇫🇷
+- Email : dfkangbie@gmail.com
+- Téléphone : 06 41 25 27 35
+- LinkedIn : linkedin.com/in/damtoti-kangbie-216531252
+
+DISPONIBILITÉ :
+- Disponible depuis Septembre 2025
+- Préavis : aucun (fin d'alternance)
+- Mobilité : Paris, Île-de-France, toute la France
+- Modes de travail : Présentiel ✅ Hybride ✅ Full remote ✅
+- Déplacements ponctuels OK
+
+PRÉTENTIONS SALARIALES :
+- Fourchette cible : 40 000 € – 45 000 € brut annuel
+- Flexible selon périmètre, avantages, perspectives, localisation, type de contrat
+
+EXPÉRIENCES PROFESSIONNELLES (4 en 2 ans) :
+1. Crédit Foncier | BPCE — Chargé d'Études (alternance, 09/2025 → présent)
+   - Dashboards Power BI pour la trésorerie
+   - Automatisation contrôles qualité collateraux via DAX et Power Query M
+   - Reporting et analyse pour les équipes trésorerie
+
+2. Neuflize OBC (ABN AMRO) — Customer Data Analyst (alternance, 09/2024 → 09/2025)
+   - Dashboards dynamiques multi-sources (CRM, SharePoint, QlikView)
+   - Automatisation KPI et reportings commerciaux
+   - Élaboration du dictionnaire de données DDS pour la gouvernance
+   - Reporting pour équipes commerciales et direction
+
+3. Gaea21 — Data Analyst (stage, 06–08/2024, Genève 🇨🇭)
+   - Web scraping Python, reportings Power BI
+   - Données environnementales
+   - Projet data complet mené en autonomie
+
+4. CEPAC | BPCE — Gestionnaire de clientèle (stage, 03–08/2023, Guadeloupe)
+   - Conseil clients, analyse financière, gestion risques portefeuille
+
+FORMATIONS :
+- MBA Finance et Data Performance — ESLSCA Business School (2025 → présent)
+- Master Data et Intelligence Artificielle — NEXA Digital School (2024–2025)
+- Maîtrise CEEM — Université de Pau et des Pays de l'Adour (2023–2024)
+
+CERTIFICATIONS :
+- ✅ Microsoft Power BI Data Analyst Associate (PL-300) — obtenu du premier coup
+- ⏳ Certification AMF — en cours
+- ✅ Chef de Projet Data et Intelligence Artificielle
+
+COMPÉTENCES TECHNIQUES :
+- BI & Reporting : Power BI (DAX, Power Query M, rapports paginés), Tableau, QlikView, Excel/VBA
+- Langages : Python (pandas, numpy, scikit-learn, seaborn, matplotlib, statsmodels), SQL, SAS, VBA
+- ML & Data Science : Régression, Classification, Clustering, Random Forest, SARIMAX, Économétrie
+- Cloud : AWS, Azure, Elasticsearch, Big Data
+- BDD : SQL Server, MySQL, PostgreSQL
+- Outils : Git, Jupyter, VS Code, SharePoint, Power Automate, Google Sheets
+
+PROJETS CONCRETS :
+Power BI :
+- Campagne Prêt Personnel : analyse 5 000 clients, taux d'acceptation 9.6%
+- Dashboard Trésorerie — Crédit Foncier | BPCE
+- Contrôle de Gestion, Maven Cycles, Abeilles Assurance
+
+Excel/VBA :
+- Dashboard Pilotage Commercial : CA 645k€, 9 360 clients, KPI de performance
+
+Python :
+- Prévision SARIMAX (séries temporelles)
+- Arbres de décision (classification supervisée)
+- Analyse exploratoire Pokémon (EDA complète)
+- Pipelines web scraping — Gaea21
+
+FORCES ET ATOUTS :
+- Double compétence Finance + Data : profil rare sur le marché
+- Certifié PL-300 Microsoft Power BI (rare chez les juniors)
+- Expérience dans 2 grands groupes bancaires (BPCE, ABN AMRO)
+- Opérationnel très rapidement (2-3 semaines)
+- Polyglotte technique : s'adapte à n'importe quel stack
+- Excellent gestionnaire du feedback et des situations de pression
+- Force de proposition naturelle
+- Langues : Français natif, Anglais professionnel
+- Loisirs : Football
+
+COMPORTEMENT / SOFT SKILLS :
+- Apprend très rapidement (courbe exponentielle)
+- Accueille les feedbacks avec ouverture
+- Reste calme et méthodique sous pression
+- Force de proposition, proactif
+- Agréable, humble, travailleur, positif — facile à intégrer
+- "Toujours chercher la solution, jamais le coupable"
+
+=== FIN DU PROFIL ===
+
+Si on te pose une question hors sujet ou sans rapport avec Damtoti, recentre gentiment la conversation sur son profil.
+Si tu ne sais pas quelque chose, suggère de contacter Damtoti directement : dfkangbie@gmail.com ou 06 41 25 27 35.`;
+
+async function claudeReply(question) {
+  conversationHistory.push({ role: 'user', content: question });
+  try {
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: conversationHistory
+      })
+    });
+    var data = await response.json();
+    var reply = (data.content && data.content[0] && data.content[0].text)
+      ? data.content[0].text
+      : "Je rencontre un petit problème technique. Contactez Damtoti directement : dfkangbie@gmail.com 😊";
+    conversationHistory.push({ role: 'assistant', content: reply });
+    return reply;
+  } catch(e) {
+    conversationHistory.pop();
+    return "Oups, problème de connexion ! 😅 Contactez Damtoti directement :\n📧 dfkangbie@gmail.com\n📞 06 41 25 27 35";
+  }
+}
+
+// ── LEGACY KB (kept as reference, no longer used) ─
 const KB = [
   // ── SALUTATIONS / CONVERSATION ─────────────
   {
@@ -1751,61 +2048,6 @@ const KB = [
   }
 ];
 
-function smartReply(q) {
-  var norm = function(s) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); };
-  var nq = norm(q);
-  var words = nq.split(/\s+/);
-
-  // Score-based matching with bonus for multi-word keys
-  var bestScore = 0;
-  var bestAnswer = null;
-  for (var i = 0; i < KB.length; i++) {
-    var e = KB[i];
-    var score = 0;
-    for (var j = 0; j < e.keys.length; j++) {
-      var k = norm(e.keys[j]);
-      if (nq.indexOf(k) !== -1) {
-        var keyWords = k.split(/\s+/).length;
-        score += keyWords;
-      }
-    }
-    if (score > bestScore) {
-      bestScore = score;
-      bestAnswer = e.answer;
-    }
-  }
-  if (bestAnswer) return bestAnswer;
-
-  // Smart fallback: try partial word matching
-  var partialBest = 0;
-  var partialAnswer = null;
-  for (var i = 0; i < KB.length; i++) {
-    var e = KB[i];
-    var pscore = 0;
-    for (var j = 0; j < e.keys.length; j++) {
-      var k = norm(e.keys[j]);
-      for (var w = 0; w < words.length; w++) {
-        if (words[w].length > 3 && k.indexOf(words[w]) !== -1) pscore++;
-        if (words[w].length > 3 && words[w].indexOf(k) !== -1) pscore++;
-      }
-    }
-    if (pscore > partialBest) {
-      partialBest = pscore;
-      partialAnswer = e.answer;
-    }
-  }
-  if (partialBest >= 2 && partialAnswer) return partialAnswer;
-
-  // Friendly random fallback
-  var fallbacks = [
-    "Hmm, question interessante ! 🤔 Je ne suis pas sur d'avoir la reponse exacte, mais je suis incollable sur Damtoti !\n\nEssayez par exemple :\n💬 \"Parlez-moi de lui\"\n💬 \"Ses competences ?\"\n💬 \"Pourquoi le recruter ?\"\n💬 \"Quel salaire ?\"\n\nOu posez-lui la question directement : " + dkMail + " 😊",
-    "Bonne question ! 🤔 Ca sort un peu de mon expertise, mais Damtoti se fera un plaisir d'y repondre en personne :\n📧 " + dkMail + "\n📞 06 41 25 27 35\n\nEn attendant, je suis imbattable sur son profil, ses competences, ses experiences et sa disponibilite ! 😊",
-    "Je ne suis pas certain de bien comprendre... 😅 Mais ne vous inquietez pas, je suis tres bavard sur Damtoti !\n\nQuelques idees :\n⭐ Ses forces et atouts\n🛠️ Ses competences techniques\n💼 Ses experiences\n📅 Sa disponibilite\n\nPosez votre question autrement, je ferai de mon mieux ! 💪",
-    "Oups, je seche sur celle-la ! 😄 Mais je peux vous assurer que Damtoti, lui, aurait la reponse !\n\nContactez-le :\n📧 " + dkMail + "\n📞 06 41 25 27 35\n\nSinon, demandez-moi n'importe quoi sur son parcours — la, je suis imbattable ! 🏆"
-  ];
-  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
-}
-
 function fmt(t) {
   return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
 }
@@ -1836,14 +2078,13 @@ function addTyping() {
 }
 function removeTyping() { var t=document.getElementById('typing'); if(t) t.remove(); }
 
-function sendMsg() {
+async function sendMsg() {
   var text = inp.value.trim(); if (!text) return;
   inp.value = ''; document.getElementById('suggestions').style.display='none';
   addMsg('user', text); addTyping();
-  setTimeout(function() {
-    removeTyping();
-    addMsg('assistant', fmt(smartReply(text)));
-  }, 600 + Math.random()*600);
+  var reply = await claudeReply(text);
+  removeTyping();
+  addMsg('assistant', fmt(reply));
 }
 
 function sendSugg(btn) { inp.value = btn.textContent; sendMsg(); }
