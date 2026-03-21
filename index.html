@@ -1742,6 +1742,27 @@ COMPORTEMENT / SOFT SKILLS :
 Si on te pose une question hors sujet ou sans rapport avec Damtoti, recentre gentiment la conversation sur son profil.
 Si tu ne sais pas quelque chose, suggère de contacter Damtoti directement : dfkangbie@gmail.com ou 06 41 25 27 35.`;
 
+// ── KB MATCHING (local fallback) ─────────────
+function kbReply(question) {
+  var q = question.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]/g, ' ');
+  var bestMatch = null;
+  var bestScore = 0;
+  for (var i = 0; i < KB.length; i++) {
+    var score = 0;
+    for (var j = 0; j < KB[i].keys.length; j++) {
+      var key = KB[i].keys[j].normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      if (q.includes(key)) score++;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = KB[i].answer;
+    }
+  }
+  if (bestMatch) return bestMatch;
+  return "Je n'ai pas trouve de reponse precise a cette question. 🤔\n\nVoici ce que je peux vous dire sur Damtoti :\n💼 Ses **experiences** professionnelles\n🛠️ Ses **competences** techniques\n🎓 Sa **formation** et ses **certifications**\n📅 Sa **disponibilite** et ses **pretentions salariales**\n📧 Ses **coordonnees** de contact\n\nReformule ta question ou contactez Damtoti directement :\n📧 " + dkMail + " | 📞 06 41 25 27 35";
+}
+
+// ── AI CHAT (Claude API with KB fallback) ────
 async function claudeReply(question) {
   conversationHistory.push({ role: 'user', content: question });
   try {
@@ -1755,19 +1776,22 @@ async function claudeReply(question) {
         messages: conversationHistory
       })
     });
+    if (!response.ok) throw new Error('API ' + response.status);
     var data = await response.json();
     var reply = (data.content && data.content[0] && data.content[0].text)
       ? data.content[0].text
-      : "Je rencontre un petit problème technique. Contactez Damtoti directement : dfkangbie@gmail.com 😊";
+      : null;
+    if (!reply) throw new Error('Empty response');
     conversationHistory.push({ role: 'assistant', content: reply });
     return reply;
   } catch(e) {
     conversationHistory.pop();
-    return "Oups, problème de connexion ! 😅 Contactez Damtoti directement :\n📧 dfkangbie@gmail.com\n📞 06 41 25 27 35";
+    // Fallback to local KB matching
+    return kbReply(question);
   }
 }
 
-// ── LEGACY KB (kept as reference, no longer used) ─
+// ── KB (Knowledge Base) ─────────────────────
 const KB = [
   // ── SALUTATIONS / CONVERSATION ─────────────
   {
@@ -2049,7 +2073,7 @@ const KB = [
 ];
 
 function fmt(t) {
-  return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n/g,'<br>');
 }
 
 var msgsEl = document.getElementById('chatMessages');
